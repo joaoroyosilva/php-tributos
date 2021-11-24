@@ -1,7 +1,7 @@
 <?php
 // This array has a single file but could whole the contents of an entire directory.
 $files = [
-    dirname(__DIR__) . '/AcmeCache.php',
+    dirname(__DIR__) . '/PhpTributosTestes.php',
 ];
 
 foreach ($files as $file) {

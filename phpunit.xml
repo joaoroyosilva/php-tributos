@@ -7,7 +7,7 @@
     </report>
   </coverage>
   <testsuites>
-    <testsuite name="AcmeTests">
+    <testsuite name="PhpTributosTestes">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>

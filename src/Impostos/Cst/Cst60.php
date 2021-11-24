@@ -49,7 +49,7 @@ class Cst60 extends CstBase
         $this->valorBcStRetido = $resultadoCalculoIcms->baseCalculoIcmsSt;
         $this->valorIcmsStRetido = $resultadoCalculoIcms->valorIcmsSt;
 
-        $this->valorCreditoOutorgadoOuPresumido = $facade->calculaCreditoIcms()->Valor;
+        $this->valorCreditoOutorgadoOuPresumido = $facade->calculaCreditoIcms()->valor;
 
         $this->percentualSt = $tributavel->percentualIcmsSt + $tributavel->percentualFcpSt;
     }

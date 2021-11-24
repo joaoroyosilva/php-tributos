@@ -6,7 +6,9 @@
   "autoload": {
     "psr-4": {
       "PhpTributos\\": [
-        "src/",
+        "src/"
+      ],
+      "PhpTributos\\Tests\\": [
         "tests/"
       ]
     }
