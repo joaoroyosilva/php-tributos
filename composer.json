@@ -1,0 +1,29 @@
+{
+  "name": "joaoroyosilva/php-tributos",
+  "description": "Lib para cálculo de tributos brasileiros",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "PhpTributos\\": [
+        "src/",
+        "tests/"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "João Gabriel",
+      "email": "joao.royosilva@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-dom": "*",
+    "ext-mbstring": "*",
+    "ext-xml": "*",
+    "ext-xmlwriter": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
