@@ -5,12 +5,12 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "PhpTributos\\": [
-        "src/"
-      ],
-      "PhpTributos\\Tests\\": [
-        "tests/"
-      ]
+      "PhpTributos\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PhpTributos\\Tests\\": "tests/"
     }
   },
   "authors": [

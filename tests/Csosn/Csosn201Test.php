@@ -52,8 +52,8 @@ class Csosn201Test extends TestCase
         $this->assertEquals(5, $csosn->percentualCredito);
         $this->assertEquals(40, $csosn->percentualMva);
         $this->assertEquals(0, $csosn->percentualReducaoSt);
-        $this->assertEquals(3220, $csosn->valorBcIcmsSt);
-        $this->assertEquals(219.6, $csosn->valorIcmsSt);
+        $this->assertEquals(3339, $csosn->valorBcIcmsSt);
+        $this->assertEquals(241.02, $csosn->valorIcmsSt);
         $this->assertEquals(100, $csosn->valorCredito);
     }
 }

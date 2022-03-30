@@ -445,7 +445,7 @@ class ResultadoTributacao
                     $this->percentualIcms = $this->icms->percentualIcms;
                     $this->valorIcms = $this->icms->valorIcms;
                     $this->percentualMva = $this->icms->percentualMva;
-                    $this->percentualReducaoSt = $this->icms->percentualReducaoSt;
+                    $this->percentualReducaoSt = $this->icms->percentualReducaoIcmsStBc;
                     $this->valorBcIcmsSt = $this->icms->valorBcIcmsSt;
                     $this->percentualIcmsSt = $this->icms->percentualMva;
                     $this->valorIcmsSt = $this->icms->valorIcmsSt;
@@ -562,7 +562,7 @@ class ResultadoTributacao
                     $this->percentualIcms = $this->csosn->percentualIcms;
                     $this->valorIcms = $this->csosn->valorIcms;
                     $this->percentualMva = $this->csosn->percentualMva;
-                    $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
+                    $this->percentualReducaoSt = $this->csosn->percentualReducaoIcmsStBc;
                     $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
                     $this->valorIcmsSt = $this->csosn->valorIcmsSt;
                     $this->percentualReducaoIcmsBc = $this->csosn->percentualReducaoIcmsBc;
@@ -580,13 +580,14 @@ class ResultadoTributacao
 
     private function calcularDifal()
     {
-        $cstCsosn = $this->crt == Crt::RegimeNormal ? $this->produto->cst : $this->produto->csosn;
-
         $this->difal = new TributacaoDifal($this->produto, $this->tipoDesconto);
 
         if (
             $this->tipoOperacao == TipoOperacao::OperacaoInterestadual &&
-            $this->cstGeraDifal($cstCsosn) &&
+            (
+                $this->cstGeraDifal($this->produto->cst) ||
+                $this->csosnGeraDifal($this->produto->csosn)
+            ) &&
             $this->produto->percentualDifalInterna != 0 &&
             $this->produto->percentualDifalInterstadual != 0
         ) {

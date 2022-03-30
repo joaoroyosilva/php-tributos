@@ -103,11 +103,11 @@ class Csosn900 extends CsosnBase
     private function calculaIcms(Tributavel $tributavel)
     {
         $this->percentualIcms = $tributavel->percentualIcms;
-        $this->percentualReducaoIcmsBc = $tributavel->percentualReducaoIcmsBc;
+        $this->percentualReducaoIcmsBc = $tributavel->percentualReducao;
 
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
 
-        $tributavel->valorIpi = $facade->calculaIpi();
+        $tributavel->valorIpi = $facade->calculaIpi()->valor;
 
         $resultadoCalculoIcms = $facade->calculaIcms();
         $this->valorBcIcms = $resultadoCalculoIcms->baseCalculo;
@@ -122,10 +122,10 @@ class Csosn900 extends CsosnBase
 
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
 
-        $tributavel->valorIpi = $facade->calculaIpi();
+        $tributavel->valorIpi = $facade->calculaIpi()->valor;
 
         $resultadoCalculoIcmsSt = $facade->calculaIcmsSt();
-        $this->valorBcIcmsSt = $resultadoCalculoIcmsSt->baseCalculo;
-        $this->valorIcmsSt = $resultadoCalculoIcmsSt->valor;
+        $this->valorBcIcmsSt = $resultadoCalculoIcmsSt->baseCalculoIcmsSt;
+        $this->valorIcmsSt = $resultadoCalculoIcmsSt->valorIcmsSt;
     }
 }
