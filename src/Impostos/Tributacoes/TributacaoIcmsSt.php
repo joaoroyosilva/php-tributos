@@ -2,7 +2,6 @@
 
 namespace PhpTributos\Impostos\Tributacoes;
 
-use PhpTributos\Flags\TipoDesconto;
 use PhpTributos\Impostos\CalculosDeBc\CalculaBaseCalculoIcmsSemIpi;
 use PhpTributos\Impostos\CalculosDeBc\CalculaBaseCalculoIcmsSt;
 use PhpTributos\Impostos\ResultadoCalculoIcmsSt;
@@ -23,12 +22,6 @@ class TributacaoIcmsSt
      * @var Tributavel
      */
     private $tributavel;
-
-    /**
-     * @var string TipoDesconto
-     */
-    private $tipoDesconto;
-
     /**
      * @param Tributavel $tributavel
      * @param string $tipoDesconto
@@ -36,7 +29,6 @@ class TributacaoIcmsSt
     public function __construct(Tributavel $tributavel, string $tipoDesconto)
     {
         $this->tributavel = $tributavel;
-        $this->tipoDesconto = $tipoDesconto;
         $this->calculaBaseCalculoIcmsSemIpi = new CalculaBaseCalculoIcmsSemIpi($tributavel, $tipoDesconto);
         $this->calculaBaseCalculoIcmsSt = new CalculaBaseCalculoIcmsSt($tributavel, $tipoDesconto);
     }
@@ -57,6 +49,11 @@ class TributacaoIcmsSt
         $valorIcmsSt = ($baseCalculoIcmsSt *
             ($this->tributavel->percentualIcmsSt / 100)) -
             $valorIcmsProprio;
+
+        if ($this->tributavel->percentualIcmsSt == 0) {
+            return new ResultadoCalculoIcmsSt(
+                $baseCalculoOperacaoPropria, 0, 0, 0);
+        }
 
         return new ResultadoCalculoIcmsSt(
             $baseCalculoOperacaoPropria,

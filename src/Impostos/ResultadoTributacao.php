@@ -445,11 +445,11 @@ class ResultadoTributacao
                     $this->percentualIcms = $this->icms->percentualIcms;
                     $this->valorIcms = $this->icms->valorIcms;
                     $this->percentualMva = $this->icms->percentualMva;
-                    $this->percentualReducaoSt = $this->icms->percentualReducaoIcmsStBc;
+                    $this->percentualReducaoSt = $this->icms->percentualReducaoSt;
                     $this->valorBcIcmsSt = $this->icms->valorBcIcmsSt;
                     $this->percentualIcmsSt = $this->icms->percentualMva;
                     $this->valorIcmsSt = $this->icms->valorIcmsSt;
-                    $this->percentualReducaoIcmsBc = $this->icms->percentualReducaoIcmsBc;
+                    $this->percentualReducaoIcmsBc = $this->icms->percentualReducao;
                     $this->percentualCredito = $this->icms->percentualCredito;
                     $this->valorCredito = $this->icms->valorCredito;
 
@@ -582,12 +582,12 @@ class ResultadoTributacao
     {
         $this->difal = new TributacaoDifal($this->produto, $this->tipoDesconto);
 
+        $calcular = $this->crt == Crt::SimplesNacional ? $this->csosnGeraDifal($this->produto->csosn) :
+        $this->cstGeraDifal($this->produto->cst);
+
         if (
             $this->tipoOperacao == TipoOperacao::OperacaoInterestadual &&
-            (
-                $this->cstGeraDifal($this->produto->cst) ||
-                $this->csosnGeraDifal($this->produto->csosn)
-            ) &&
+            $calcular &&
             $this->produto->percentualDifalInterna != 0 &&
             $this->produto->percentualDifalInterstadual != 0
         ) {
@@ -680,7 +680,7 @@ class ResultadoTributacao
         $this->valorIss = $result->valor;
     }
 
-    private function cstGeraDifal(Cst $cst): bool
+    private function cstGeraDifal($cst): bool
     {
         return (
             $cst == Cst::Cst00 ||
@@ -711,7 +711,7 @@ class ResultadoTributacao
         $this->valorTotalTributos = $resultado->tributacaoMuvalorTotalTributos;
     }
 
-    private function csosnGeraDifal(Csosn $csosn): bool
+    private function csosnGeraDifal($csosn): bool
     {
         return (
             $csosn == Csosn::Csosn102 ||

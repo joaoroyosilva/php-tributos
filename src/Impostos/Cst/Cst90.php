@@ -166,8 +166,8 @@ class Cst90 extends CstBase
         $tributavel->valorIpi = $facade->calculaIpi()->valor;
 
         $resultadoCalculoIcms = $facade->calculaIcms();
-        $this->valorBcIcms = $resultadoCalculoIcms->baseCalculoIcms;
-        $this->valorIcms = $resultadoCalculoIcms->valorIcms;
+        $this->valorBcIcms = $resultadoCalculoIcms->baseCalculo;
+        $this->valorIcms = $resultadoCalculoIcms->valor;
     }
 
     private function calculaFcp(Tributavel $tributavel)
@@ -178,7 +178,7 @@ class Cst90 extends CstBase
 
         $resultadoCalculoFcp = $facade->calculaFcp();
         $this->valorBcFcp = $resultadoCalculoFcp->baseCalculo;
-        $this->valorFcp = $resultadoCalculoFcp->valorFcp;
+        $this->valorFcp = $resultadoCalculoFcp->valor;
     }
 
     private function calculaFcpSt(Tributavel $tributavel)

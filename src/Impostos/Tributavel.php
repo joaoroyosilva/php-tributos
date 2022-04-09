@@ -126,6 +126,11 @@ abstract class Tributavel
     public $percentualIpi = 0;
 
     /**
+     * @var bool
+     */
+    public $icmsSobreIpi = false;
+
+    /**
      * @var float
      */
     public $percentualCofins = 0;
