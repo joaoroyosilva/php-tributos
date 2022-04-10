@@ -117,7 +117,7 @@ class Csosn900 extends CsosnBase
     private function calculaIcmsSt(Tributavel $tributavel)
     {
         $this->percentualIcmsSt = $tributavel->percentualIcmsSt;
-        $this->percentualReducaoIcmsStBc = $tributavel->percentualReducaoIcmsStBc;
+        $this->percentualReducaoIcmsStBc = $tributavel->percentualReducaoSt;
         $this->percentualMva = $tributavel->percentualMva;
 
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
