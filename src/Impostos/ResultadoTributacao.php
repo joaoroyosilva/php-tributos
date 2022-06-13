@@ -484,41 +484,22 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
-
-                    switch ($this->csosn->modalidadeDeterminacaoBcIcmsSt) {
-                        case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
-                            $this->percentualMva = $this->csosn->percentualMva;
-                            $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
-                            $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                            $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
-                            $this->valorIcmsSt = $this->csosn->valorIcmsSt;
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    break;
+                    //   $this->percentualCredito = $this->csosn->percentualCredito;
+                    $this->percentualMva = $this->csosn->percentualMva;
+                    $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
+                    $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
+                    $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
+                    $this->valorIcmsSt = $this->csosn->valorIcmsSt;
 
                 case Csosn::Csosn202:
                     $this->csosn = new Csosn202();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
-
-                    switch ($this->csosn->modalidadeDeterminacaoBcIcmsSt) {
-                        case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
-                            $this->percentualMva = $this->csosn->percentualMvaSt;
-                            $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
-                            $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                            $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
-                            $this->valorIcmsSt = $this->csosn->valorIcmsSt;
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
+                    $this->percentualMva = $this->csosn->percentualMvaSt;
+                    $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
+                    $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
+                    $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
+                    $this->valorIcmsSt = $this->csosn->valorIcmsSt;
                     break;
 
                 case Csosn::Csosn203:
