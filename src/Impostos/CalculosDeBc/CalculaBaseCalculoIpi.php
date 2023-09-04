@@ -22,4 +22,11 @@ class CalculaBaseCalculoIpi extends CalculaBaseCalculoBase
         parent::__construct($tributavel);
         $this->tipoDesconto = $tipoDesconto;
     }
+
+    public function calculaBaseDeCalculo(): float
+    {
+        $baseCalculo = parent::calculaBaseDeCalculo() - $this->tributavel->desconto;
+
+        return $baseCalculo;
+    }
 }
