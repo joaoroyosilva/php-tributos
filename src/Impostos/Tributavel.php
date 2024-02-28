@@ -78,12 +78,22 @@ abstract class Tributavel
     /**
      * @var float
      */
+    public $percentualReducaoIcmsEfetivo = 0;
+
+    /**
+     * @var float
+     */
     public $quantidadeProduto = 0;
 
     /**
      * @var float
      */
     public $percentualIcms = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualIcmsEfetivo = 0;
 
     /**
      * @var float

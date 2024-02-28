@@ -2,6 +2,7 @@
 
 namespace PhpTributos\Facade;
 
+use PhpTributos\Flags\TipoCalculoIcmsDesonerado;
 use PhpTributos\Flags\TipoDesconto;
 use PhpTributos\Impostos\ResultadoCalculoCofins;
 use PhpTributos\Impostos\ResultadoCalculoCredito;
@@ -10,6 +11,8 @@ use PhpTributos\Impostos\ResultadoCalculoFcp;
 use PhpTributos\Impostos\ResultadoCalculoFcpSt;
 use PhpTributos\Impostos\ResultadoCalculoIbpt;
 use PhpTributos\Impostos\ResultadoCalculoIcms;
+use PhpTributos\Impostos\ResultadoCalculoIcmsDesonerado;
+use PhpTributos\Impostos\ResultadoCalculoIcmsEfetivo;
 use PhpTributos\Impostos\ResultadoCalculoIcmsSt;
 use PhpTributos\Impostos\ResultadoCalculoIpi;
 use PhpTributos\Impostos\ResultadoCalculoPis;
@@ -20,6 +23,8 @@ use PhpTributos\Impostos\Tributacoes\TributacaoFcp;
 use PhpTributos\Impostos\Tributacoes\TributacaoFcpSt;
 use PhpTributos\Impostos\Tributacoes\TributacaoIbpt;
 use PhpTributos\Impostos\Tributacoes\TributacaoIcms;
+use PhpTributos\Impostos\Tributacoes\TributacaoIcmsDesonerado;
+use PhpTributos\Impostos\Tributacoes\TributacaoIcmsEfetivo;
 use PhpTributos\Impostos\Tributacoes\TributacaoIcmsSt;
 use PhpTributos\Impostos\Tributacoes\TributacaoIpi;
 use PhpTributos\Impostos\Tributacoes\TributacaoPis;
@@ -28,30 +33,36 @@ use PhpTributos\Impostos\Tributavel;
 class FacadeCalculadoraTributacao
 {
     /**
-     * @var Tributavel
-     */
-    private $tributavel;
-
-    /**
-     * @var string
-     */
-    private $tipoDesconto;
-
-    /**
      * @param Tributavel $tributavel
      * @param string $tipoDesconto
+     * @param string $tipoCalculoIcmsDesonerado
      */
     public function __construct(
-        Tributavel $tributavel,
-        string $tipoDesconto = TipoDesconto::Incondicional
+        public Tributavel $tributavel,
+        public string $tipoDesconto = TipoDesconto::Incondicional,
+        public string $tipoCalculoIcmsDesonerado = TipoCalculoIcmsDesonerado::BasePorDentro
     ) {
-        $this->tributavel = $tributavel;
-        $this->tipoDesconto = $tipoDesconto;
     }
 
     public function calculaIcms(): ResultadoCalculoIcms
     {
         $icms = new TributacaoIcms($this->tributavel, $this->tipoDesconto);
+        return $icms->calcula();
+    }
+
+    public function calculaIcmsEfetivo(): ResultadoCalculoIcmsEfetivo
+    {
+        $icms = new TributacaoIcmsEfetivo($this->tributavel, $this->tipoDesconto);
+        return $icms->calcula();
+    }
+
+    public function calculaIcmsDesonerado(): ResultadoCalculoIcmsDesonerado
+    {
+        $icms = new TributacaoIcmsDesonerado(
+            $this->tributavel,
+            $this->tipoDesconto,
+            $this->tipoCalculoIcmsDesonerado
+        );
         return $icms->calcula();
     }
 

@@ -5,6 +5,7 @@ namespace PhpTributos\Impostos\Cst;
 use PhpTributos\Facade\FacadeCalculadoraTributacao;
 use PhpTributos\Flags\Cst;
 use PhpTributos\Flags\ModalidadeDeterminacaoBcIcms;
+use PhpTributos\Flags\TipoCalculoIcmsDesonerado;
 use PhpTributos\Impostos\Cst\Base\CstBase;
 use PhpTributos\Impostos\Tributavel;
 
@@ -47,7 +48,10 @@ class Cst00 extends CstBase
 
     public function calcula(Tributavel $tributavel): void
     {
-        $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
+        $facade = new FacadeCalculadoraTributacao(
+            $tributavel,
+            $this->tipoDesconto
+        );
 
         $resultadoCalculoIcms = $facade->calculaIcms();
         $resultadoCalculoFcp = $facade->calculaFcp();

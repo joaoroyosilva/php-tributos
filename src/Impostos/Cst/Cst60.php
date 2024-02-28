@@ -39,6 +39,21 @@ class Cst60 extends CstBase
      */
     public $percentualSt = 0;
 
+    /**
+     * @var float
+     */
+    public $baseCalculoIcmsEfetivo = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualIcmsEfetivo = 0;
+
+    /**
+     * @var float
+     */
+    public $valorIcmsEfetivo = 0;
+
     public function calcula(Tributavel $tributavel): void
     {
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
@@ -52,5 +67,13 @@ class Cst60 extends CstBase
         $this->valorCreditoOutorgadoOuPresumido = $facade->calculaCreditoIcms()->valor;
 
         $this->percentualSt = $tributavel->percentualIcmsSt + $tributavel->percentualFcpSt;
+
+        $this->percentualIcmsEfetivo = $tributavel->percentualIcmsEfetivo;
+
+        $resultadoCalculoIcmsEfetivo = $facade->calculaIcmsEfetivo();
+
+        $this->baseCalculoIcmsEfetivo = $resultadoCalculoIcmsEfetivo->baseCalculo;
+        $this->valorIcmsEfetivo = $resultadoCalculoIcmsEfetivo->valor;
+
     }
 }

@@ -25,6 +25,7 @@ abstract class CsosnBase
      */
     public $tipoDesconto;
 
+
     public function __construct(
         int $origemMercadoria = OrigemMercadoria::Nacional,
         string $tipoDesconto = TipoDesconto::Incondicional

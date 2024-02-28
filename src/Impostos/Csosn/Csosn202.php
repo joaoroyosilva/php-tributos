@@ -4,11 +4,11 @@ namespace PhpTributos\Impostos\Csosn;
 
 use PhpTributos\Facade\FacadeCalculadoraTributacao;
 use PhpTributos\Flags\Csosn;
+use PhpTributos\Flags\ModalidadeDeterminacaoBcIcmsSt;
 use PhpTributos\Impostos\Tributavel;
 
 class Csosn202 extends Csosn102
 {
-
     /**
      * @var float
      */
@@ -38,6 +38,12 @@ class Csosn202 extends Csosn102
      * @var Csosn
      */
     protected $csosn = Csosn::Csosn202;
+
+    /**
+     * @var ModalidadeDeterminacaoBcIcmsSt
+     */
+    public $modalidadeDeterminacaoBcIcmsSt = ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado;
+
 
     /**
      * @param Tributavel $tributavel

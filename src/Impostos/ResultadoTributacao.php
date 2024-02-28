@@ -26,8 +26,10 @@ use PhpTributos\Impostos\Cst\Base\CstBase;
 use PhpTributos\Impostos\Cst\Cst00;
 use PhpTributos\Impostos\Cst\Cst10;
 use PhpTributos\Impostos\Cst\Cst20;
+use PhpTributos\Impostos\Cst\Cst30;
 use PhpTributos\Impostos\Cst\Cst41;
 use PhpTributos\Impostos\Cst\Cst50;
+use PhpTributos\Impostos\Cst\Cst51;
 use PhpTributos\Impostos\Cst\Cst60;
 use PhpTributos\Impostos\Cst\Cst70;
 use PhpTributos\Impostos\Cst\Cst90;
@@ -49,7 +51,7 @@ class ResultadoTributacao
     /**
      * @var CsosnBase
      */
-    private $csosnBase;
+    private $csosn;
 
     /**
      * @var TributacaoPis
@@ -95,6 +97,11 @@ class ResultadoTributacao
      * @var float
      */
     public $percentualIcms = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualIcmsEfetivo = 0;
 
     /**
      * @var float
@@ -149,7 +156,17 @@ class ResultadoTributacao
     /**
      * @var float
      */
+    public $valorBcIcmsEfetivo = 0;
+
+    /**
+     * @var float
+     */
     public $valorIcms = 0;
+
+    /**
+     * @var float
+     */
+    public $valorIcmsEfetivo = 0;
 
     /**
      * @var float
@@ -378,36 +395,59 @@ class ResultadoTributacao
                     $this->icms = new Cst00();
                     $this->icms->calcula($this->produto);
 
-                    $this->valorBcIcms = $this->icms->valorBcIcms;
-                    $this->percentualIcms = $this->icms->percentualIcms;
-                    $this->valorIcms = $this->icms->valorIcms;
+                    /** @var Cst00 */
+                    $resultado =  $this->icms;
+
+                    $this->valorBcIcms = $resultado->valorBcIcms;
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
                     break;
 
                 case Cst::Cst10:
                     $this->icms = new Cst10();
                     $this->icms->calcula($this->produto);
 
-                    $this->valorBcIcms = $this->icms->valorBcIcms;
-                    $this->percentualIcms = $this->icms->percentualIcms;
-                    $this->valorIcms = $this->icms->valorIcms;
-                    $this->percentualMva = $this->icms->percentualMva;
-                    $this->percentualReducaoSt = $this->icms->percentualReducaoSt;
-                    $this->valorBcIcmsSt = $this->icms->valorBcIcmsSt;
-                    $this->percentualIcmsSt = $this->icms->percentualIcmsSt;
-                    $this->valorIcmsSt = $this->icms->valorIcmsSt;
+                    /** @var Cst10 */
+                    $resultado =  $this->icms;
+
+                    $this->valorBcIcms = $resultado->valorBcIcms;
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
+                    $this->percentualMva = $resultado->percentualMva;
+                    $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                    $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                    $this->percentualIcmsSt = $resultado->percentualIcmsSt;
+                    $this->valorIcmsSt = $resultado->valorIcmsSt;
                     break;
 
                 case Cst::Cst20:
                     $this->icms = new Cst20();
                     $this->icms->calcula($this->produto);
 
-                    $this->percentualMva = $this->icms->percentualMva;
-                    $this->percentualReducaoSt = $this->icms->percentualReducaoSt;
-                    $this->valorBcIcmsSt = $this->icms->valorBcIcmsSt;
-                    $this->percentualIcmsSt = $this->icms->percentualIcmsSt;
-                    $this->valorIcmsSt = $this->icms->valorIcmsSt;
-                    break;
+                    /** @var Cst20 */
+                    $resultado =  $this->icms;
 
+                    $this->valorBcIcms = $resultado->valorBcIcms;
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
+                    $this->percentualReducao = $resultado->percentualReducao;
+                    $this->valorIcmsDesonerado = $resultado->valorIcmsDesonerado;
+
+                    break;
+                case Cst::Cst30:
+                    $this->icms = new Cst30();
+                    $this->icms->calcula($this->produto);
+
+                    /** @var Cst30 */
+                    $resultado =  $this->icms;
+
+                    $this->percentualMva = $resultado->percentualMva;
+                    $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                    $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                    $this->percentualIcmsSt = $resultado->percentualIcmsSt;
+                    $this->valorIcmsSt = $resultado->valorIcmsSt;
+                    $this->valorIcmsDesonerado = $resultado->valorIcmsDesonerado;
+                    break;
                 case Cst::Cst41:
                     $this->icms = new Cst41();
                     $this->icms->calcula($this->produto);
@@ -419,13 +459,35 @@ class ResultadoTributacao
                     $this->icms->calcula($this->produto);
 
                     break;
+                case Cst::Cst51:
+                    $this->icms = new Cst51();
+                    $this->icms->calcula($this->produto);
+
+                    /** @var Cst51 */
+                    $resultado =  $this->icms;
+
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
+                    $this->percentualReducao = $resultado->percentualReducao;
+                    $this->percentualDiferimento = $resultado->percentualDiferimento;
+                    $this->valorIcmsDiferido = $resultado->valorIcmsDiferido;
+                    $this->valorIcmsOperacao = $resultado->valorIcmsOperacao;
+
+
+                    break;
 
                 case Cst::Cst60:
                     $this->icms = new Cst60();
                     $this->icms->calcula($this->produto);
 
-                    $this->percentualBcStRetido = $this->icms->percentualBcStRetido;
-                    $this->valorBcStRetido = $this->icms->valorBcStRetido;
+                    /** @var Cst60 */
+                    $resultado =  $this->icms;
+
+                    $this->percentualBcStRetido = $resultado->percentualBcStRetido;
+                    $this->valorBcStRetido = $resultado->valorBcStRetido;
+                    $this->valorBcIcmsEfetivo = $resultado->baseCalculoIcmsEfetivo;
+                    $this->percentualIcmsEfetivo = $resultado->percentualIcmsEfetivo;
+                    $this->valorBcIcmsEfetivo = $resultado->valorIcmsEfetivo;
 
                     break;
 
@@ -433,7 +495,11 @@ class ResultadoTributacao
                     $this->icms = new Cst70();
                     $this->icms->calcula($this->produto);
 
-                    $this->percentualReducao = $this->icms->percentualReducao;
+                    /** @var Cst70 */
+                    $resultado =  $this->icms;
+
+                    $this->percentualReducao = $resultado->percentualReducao;
+                    $this->valorIcmsDesonerado = $resultado->valorIcmsDesonerado;
 
                     break;
 
@@ -441,17 +507,20 @@ class ResultadoTributacao
                     $this->icms = new Cst90();
                     $this->icms->calcula($this->produto);
 
-                    $this->valorBcIcms = $this->icms->valorBcIcms;
-                    $this->percentualIcms = $this->icms->percentualIcms;
-                    $this->valorIcms = $this->icms->valorIcms;
-                    $this->percentualMva = $this->icms->percentualMva;
-                    $this->percentualReducaoSt = $this->icms->percentualReducaoSt;
-                    $this->valorBcIcmsSt = $this->icms->valorBcIcmsSt;
-                    $this->percentualIcmsSt = $this->icms->percentualMva;
-                    $this->valorIcmsSt = $this->icms->valorIcmsSt;
-                    $this->percentualReducaoIcmsBc = $this->icms->percentualReducao;
-                    $this->percentualCredito = $this->icms->percentualCredito;
-                    $this->valorCredito = $this->icms->valorCredito;
+                    /** @var Cst90 */
+                    $resultado =  $this->icms;
+
+                    $this->valorBcIcms = $resultado->valorBcIcms;
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
+                    $this->percentualMva = $resultado->percentualMva;
+                    $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                    $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                    $this->percentualIcmsSt = $resultado->percentualMva;
+                    $this->valorIcmsSt = $resultado->valorIcmsSt;
+                    $this->percentualReducaoIcmsBc = $resultado->percentualReducaoSt;
+                    $this->percentualCredito = $resultado->percentualCredito;
+                    $this->valorCredito = $resultado->valorCredito;
 
                     break;
 
@@ -465,8 +534,11 @@ class ResultadoTributacao
                     $this->csosn = new Csosn101();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
+                    /** @var Csosn101 */
+                    $resultado =  $this->icms;
+
+                    $this->valorCredito = $resultado->valorCredito;
+                    $this->percentualCredito = $resultado->percentualCredito;
 
                     break;
 
@@ -483,16 +555,19 @@ class ResultadoTributacao
                     $this->csosn = new Csosn201();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
+                    /** @var Csosn201 */
+                    $resultado =  $this->icms;
 
-                    switch ($this->csosn->modalidadeDeterminacaoBcIcmsSt) {
+                    $this->valorCredito = $resultado->valorCredito;
+                    $this->percentualCredito = $resultado->percentualCredito;
+
+                    switch ($resultado->modalidadeDeterminacaoBcIcmsSt) {
                         case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
-                            $this->percentualMva = $this->csosn->percentualMva;
-                            $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
-                            $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                            $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
-                            $this->valorIcmsSt = $this->csosn->valorIcmsSt;
+                            $this->percentualMva = $resultado->percentualMva;
+                            $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                            $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                            $this->percentualIcmsSt = $resultado->percentualIcmsSt;
+                            $this->valorIcmsSt = $resultado->valorIcmsSt;
                             break;
                         default:
                             # code...
@@ -504,16 +579,16 @@ class ResultadoTributacao
                     $this->csosn = new Csosn202();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
+                    /** @var Csosn202 */
+                    $resultado =  $this->icms;
 
-                    switch ($this->csosn->modalidadeDeterminacaoBcIcmsSt) {
+                    switch ($resultado->modalidadeDeterminacaoBcIcmsSt) {
                         case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
-                            $this->percentualMva = $this->csosn->percentualMvaSt;
-                            $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
-                            $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                            $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
-                            $this->valorIcmsSt = $this->csosn->valorIcmsSt;
+                            $this->percentualMva = $resultado->percentualMvaSt;
+                            $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                            $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                            $this->percentualIcmsSt = $resultado->percentualIcmsSt;
+                            $this->valorIcmsSt = $resultado->valorIcmsSt;
                             break;
                         default:
                             # code...
@@ -525,16 +600,16 @@ class ResultadoTributacao
                     $this->csosn = new Csosn203();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
+                    /** @var Csosn203 */
+                    $resultado =  $this->icms;
 
-                    switch ($this->csosn->modalidadeDeterminacaoBcIcmsSt) {
+                    switch ($resultado->modalidadeDeterminacaoBcIcmsSt) {
                         case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
-                            $this->percentualMva = $this->csosn->percentualMvaSt;
-                            $this->percentualReducaoSt = $this->csosn->percentualReducaoSt;
-                            $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                            $this->percentualIcmsSt = $this->csosn->percentualIcmsSt;
-                            $this->valorIcmsSt = $this->csosn->valorIcmsSt;
+                            $this->percentualMva = $resultado->percentualMvaSt;
+                            $this->percentualReducaoSt = $resultado->percentualReducaoSt;
+                            $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                            $this->percentualIcmsSt = $resultado->percentualIcmsSt;
+                            $this->valorIcmsSt = $resultado->valorIcmsSt;
                             break;
                         default:
                             # code...
@@ -552,22 +627,34 @@ class ResultadoTributacao
 
                 case Csosn::Csosn500:
                     $this->csosn = new Csosn500();
+                    $this->csosn->calcula($this->produto);
+
+                    /** @var Csosn500 */
+                    $resultado =  $this->icms;
+
+                    $this->valorBcIcmsEfetivo = $resultado->baseCalculoIcmsEfetivo;
+                    $this->percentualIcmsEfetivo = $resultado->percentualIcmsEfetivo;
+                    $this->valorBcIcmsEfetivo = $resultado->valorIcmsEfetivo;
+
                     break;
 
                 case Csosn::Csosn900:
                     $this->csosn = new Csosn900();
                     $this->csosn->calcula($this->produto);
 
-                    $this->valorBcIcms = $this->csosn->valorBcIcms;
-                    $this->percentualIcms = $this->csosn->percentualIcms;
-                    $this->valorIcms = $this->csosn->valorIcms;
-                    $this->percentualMva = $this->csosn->percentualMva;
-                    $this->percentualReducaoSt = $this->csosn->percentualReducaoIcmsStBc;
-                    $this->valorBcIcmsSt = $this->csosn->valorBcIcmsSt;
-                    $this->valorIcmsSt = $this->csosn->valorIcmsSt;
-                    $this->percentualReducaoIcmsBc = $this->csosn->percentualReducaoIcmsBc;
-                    $this->valorCredito = $this->csosn->valorCredito;
-                    $this->percentualCredito = $this->csosn->percentualCredito;
+                    /** @var Csosn900 */
+                    $resultado =  $this->icms;
+
+                    $this->valorBcIcms = $resultado->valorBcIcms;
+                    $this->percentualIcms = $resultado->percentualIcms;
+                    $this->valorIcms = $resultado->valorIcms;
+                    $this->percentualMva = $resultado->percentualMva;
+                    $this->percentualReducaoSt = $resultado->percentualReducaoIcmsStBc;
+                    $this->valorBcIcmsSt = $resultado->valorBcIcmsSt;
+                    $this->valorIcmsSt = $resultado->valorIcmsSt;
+                    $this->percentualReducaoIcmsBc = $resultado->percentualReducaoIcmsBc;
+                    $this->valorCredito = $resultado->valorCredito;
+                    $this->percentualCredito = $resultado->percentualCredito;
 
                     break;
 
@@ -703,12 +790,15 @@ class ResultadoTributacao
     private function calculaIbpt(): void
     {
         $this->ibpt = new TributacaoIbpt($this->produto);
+
+        /** @var ResultadoCalculoIbpt */
         $resultado = $this->ibpt->calcula();
+
         $this->valorTributacaoFederal = $resultado->tributacaoFederal;
-        $this->valorTributacaoFederalImportados = $resultado->tributacaoFederalImpovalorTributacaoFederalImportados;
-        $this->valorTributacaoEstadual = $resultado->tributacaoEstavalorTributacaoEstadual;
-        $this->valorTributacaoMunicipal = $resultado->tributacaoMuvalorTributacaoMunicipal;
-        $this->valorTotalTributos = $resultado->tributacaoMuvalorTotalTributos;
+        $this->valorTributacaoFederalImportados = $resultado->tributacaoFederalImportados;
+        $this->valorTributacaoEstadual = $resultado->tributacaoEstadual;
+        $this->valorTributacaoMunicipal = $resultado->tributacaoMunicipal;
+        $this->valorTotalTributos = $resultado->valorTotalTributos;
     }
 
     private function csosnGeraDifal($csosn): bool
