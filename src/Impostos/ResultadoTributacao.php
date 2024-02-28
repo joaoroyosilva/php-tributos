@@ -487,7 +487,7 @@ class ResultadoTributacao
                     $this->valorBcStRetido = $resultado->valorBcStRetido;
                     $this->valorBcIcmsEfetivo = $resultado->baseCalculoIcmsEfetivo;
                     $this->percentualIcmsEfetivo = $resultado->percentualIcmsEfetivo;
-                    $this->valorBcIcmsEfetivo = $resultado->valorIcmsEfetivo;
+                    $this->valorIcmsEfetivo = $resultado->valorIcmsEfetivo;
 
                     break;
 
@@ -634,7 +634,7 @@ class ResultadoTributacao
 
                     $this->valorBcIcmsEfetivo = $resultado->baseCalculoIcmsEfetivo;
                     $this->percentualIcmsEfetivo = $resultado->percentualIcmsEfetivo;
-                    $this->valorBcIcmsEfetivo = $resultado->valorIcmsEfetivo;
+                    $this->valorIcmsEfetivo = $resultado->valorIcmsEfetivo;
 
                     break;
 

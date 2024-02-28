@@ -37,14 +37,14 @@ class CalculaBaseCalculoIcmsEfetivo extends CalculaBaseCalculoBase
     private function calculaBaseComDescontoCondicional(float $baseCalculoInicial): float
     {
         $baseCalculo = $baseCalculoInicial + $this->tributavel->desconto;
-        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducao / 100);
+        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducaoIcmsEfetivo / 100);
         return $baseCalculo;
     }
 
     private function calculaBaseComDescontoIncondicional(float $baseCalculoInicial): float
     {
         $baseCalculo = $baseCalculoInicial - $this->tributavel->desconto;
-        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducao / 100);
+        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducaoIcmsEfetivo / 100);
         return $baseCalculo;
     }
 }
