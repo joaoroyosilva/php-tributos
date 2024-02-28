@@ -23,10 +23,28 @@ class CalculaBaseCalculoIpi extends CalculaBaseCalculoBase
         $this->tipoDesconto = $tipoDesconto;
     }
 
-    public function calculaBaseDeCalculo(): float
+    public function calculaBaseCalculoBase(): float
     {
-        $baseCalculo = parent::calculaBaseDeCalculo() - $this->tributavel->desconto;
+        $baseCalculo = $this->tributavel->icmsSobreIpi ?
+        parent::calculaBaseDeCalculo() + $this->tributavel->valorIpi : parent::calculaBaseDeCalculo();
 
+        return $this->tipoDesconto == TipoDesconto::Condicional ?
+        $this->calculaBaseComDescontoCondicional($baseCalculo) :
+        $this->calculaBaseComDescontoIncondicional($baseCalculo);
+
+    }
+
+    private function calculaBaseComDescontoCondicional(float $baseCalculoInicial): float
+    {
+        $baseCalculo = $baseCalculoInicial + $this->tributavel->desconto;
+        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducao / 100);
+        return $baseCalculo;
+    }
+
+    private function calculaBaseComDescontoIncondicional(float $baseCalculoInicial): float
+    {
+        $baseCalculo = $baseCalculoInicial - $this->tributavel->desconto;
+        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducao / 100);
         return $baseCalculo;
     }
 }

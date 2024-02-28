@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTributos\Tests\Csosn;
+namespace PhpTributos\Tests;
 
 use PhpTributos\Entidades\Produto;
 use PhpTributos\Facade\FacadeCalculadoraTributacao;
@@ -19,6 +19,7 @@ class CalculaDifalFcpTest extends TestCase
         $produto->desconto = 10;
         $produto->valorIpi = 50;
         $produto->percentualFcp = 2;
+        $produto->icmsSobreIpi = true;
         $produto->percentualDifalInterna = 18;
         $produto->percentualDifalInterstadual = 12;
 

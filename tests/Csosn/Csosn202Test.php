@@ -18,6 +18,7 @@ class Csosn202Test extends TestCase
         $produto->percentualIcmsSt = 18;
         $produto->percentualIpi = 15;
         $produto->percentualMva = 40;
+        $produto->icmsSobreIpi = true;
 
         return $produto;
     }
@@ -31,7 +32,7 @@ class Csosn202Test extends TestCase
         $this->assertEquals(18, $csosn->percentualIcmsSt);
         $this->assertEquals(0, $csosn->percentualReducaoSt);
         $this->assertEquals(3220, $csosn->valorBcIcmsSt);
-        $this->assertEquals(219.6, $csosn->valorIcmsSt);
+        $this->assertEquals(219.6, round($csosn->valorIcmsSt, 2));
     }
 
     public function testaCalculoComDescontoCondicional()
@@ -47,6 +48,6 @@ class Csosn202Test extends TestCase
         $this->assertEquals(18, $csosn->percentualIcmsSt);
         $this->assertEquals(0, $csosn->percentualReducaoSt);
         $this->assertEquals(3339, $csosn->valorBcIcmsSt);
-        $this->assertEquals(241.02, $csosn->valorIcmsSt);
+        $this->assertEquals(241.02, round($csosn->valorIcmsSt, 2));
     }
 }
