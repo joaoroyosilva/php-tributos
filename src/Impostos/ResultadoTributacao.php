@@ -535,7 +535,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn101 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     $this->valorCredito = $resultado->valorCredito;
                     $this->percentualCredito = $resultado->percentualCredito;
@@ -556,7 +556,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn201 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     $this->valorCredito = $resultado->valorCredito;
                     $this->percentualCredito = $resultado->percentualCredito;
@@ -580,7 +580,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn202 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     switch ($resultado->modalidadeDeterminacaoBcIcmsSt) {
                         case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
@@ -601,7 +601,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn203 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     switch ($resultado->modalidadeDeterminacaoBcIcmsSt) {
                         case ModalidadeDeterminacaoBcIcmsSt::MargemValorAgregado:
@@ -630,7 +630,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn500 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     $this->valorBcIcmsEfetivo = $resultado->baseCalculoIcmsEfetivo;
                     $this->percentualIcmsEfetivo = $resultado->percentualIcmsEfetivo;
@@ -643,7 +643,7 @@ class ResultadoTributacao
                     $this->csosn->calcula($this->produto);
 
                     /** @var Csosn900 */
-                    $resultado =  $this->icms;
+                    $resultado =  $this->csosn;
 
                     $this->valorBcIcms = $resultado->valorBcIcms;
                     $this->percentualIcms = $resultado->percentualIcms;
