@@ -52,7 +52,11 @@ class TributacaoIcmsSt
 
         if ($this->tributavel->percentualIcmsSt == 0) {
             return new ResultadoCalculoIcmsSt(
-                $baseCalculoOperacaoPropria, 0, 0, 0);
+                $baseCalculoOperacaoPropria,
+                0,
+                0,
+                0
+            );
         }
 
         return new ResultadoCalculoIcmsSt(
