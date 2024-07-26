@@ -41,6 +41,11 @@ abstract class Tributavel
     public $isServico = false;
 
     /**
+     * @var bool
+     */
+    public $deduzIcmsPisCofins = false;
+
+    /**
      * @var float
      */
     public $valorProduto = 0;
@@ -69,6 +74,11 @@ abstract class Tributavel
      * @var float
      */
     public $valorIpi = 0;
+
+    /**
+     * @var float
+     */
+    public $valorIcms = 0;
 
     /**
      * @var float

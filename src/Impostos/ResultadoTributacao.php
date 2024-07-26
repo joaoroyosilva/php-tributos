@@ -714,6 +714,7 @@ class ResultadoTributacao
     private function calcularPis()
     {
         $this->pis = new TributacaoPis($this->produto, $this->tipoDesconto);
+        $this->produto->valorIcms = $this->valorIcms;
 
         if (
             $this->produto->cstPisCofins == CstPisCofins::Cst01 ||
@@ -728,6 +729,7 @@ class ResultadoTributacao
     private function calcularCofins()
     {
         $this->cofins = new TributacaoCofins($this->produto, $this->tipoDesconto);
+        $this->produto->valorIcms = $this->valorIcms;
 
         if (
             $this->produto->cstPisCofins == CstPisCofins::Cst01 ||

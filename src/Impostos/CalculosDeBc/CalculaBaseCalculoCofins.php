@@ -25,8 +25,14 @@ class CalculaBaseCalculoCofins extends CalculaBaseCalculoBase
 
     public function calculaBaseCalculoBase(): float
     {
-        $baseCalculo = $this->tributavel->icmsSobreIpi ?
-        parent::calculaBaseDeCalculo() + $this->tributavel->valorIpi : parent::calculaBaseDeCalculo();
+        if($this->tributavel->deduzIcmsPisCofins) {
+            $baseCalculo =  parent::calculaBaseDeCalculo() - $this->tributavel->valorIcms;
+        } elseif($this->tributavel->icmsSobreIpi) {
+            $baseCalculo =  parent::calculaBaseDeCalculo() + $this->tributavel->valorIpi;
+        } else {
+            $baseCalculo =  parent::calculaBaseDeCalculo();
+        }
+
         return $this->tipoDesconto == TipoDesconto::Condicional ?
         $this->calculaBaseComDescontoCondicional($baseCalculo) :
         $this->calculaBaseComDescontoIncondicional($baseCalculo);
