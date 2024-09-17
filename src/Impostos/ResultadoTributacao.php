@@ -370,7 +370,7 @@ class ResultadoTributacao
     public function calcular(): ResultadoTributacao
     {
         if ($this->produto->isServico) {
-            $calcularRetencao = ($this->crt != Crt::RegimeNormal || $this->crt != Crt::SimplesNacionalExcesso) &&
+            $calcularRetencao = ($this->crt == Crt::RegimeNormal || $this->crt == Crt::SimplesNacionalExcesso) &&
             $this->tipoPessoa != TipoPessoa::Fisica;
             $this->calcularIssqn($calcularRetencao);
         } else {
@@ -389,7 +389,7 @@ class ResultadoTributacao
 
     private function calcularICms()
     {
-        if (($this->crt != Crt::RegimeNormal || $this->crt != Crt::SimplesNacionalExcesso)) {
+        if (($this->crt == Crt::RegimeNormal || $this->crt == Crt::SimplesNacionalExcesso)) {
             switch ($this->produto->cst) {
                 case Cst::Cst00:
                     $this->icms = new Cst00();
