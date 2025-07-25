@@ -13,7 +13,7 @@ class TributacaoIbsUf
     /**
      * @var CalculaBaseCalculoIbsUf
      */
-    private $calculaBaseCalculoIcms;
+    private $calculaBaseCalculo;
 
     /**
      * @var Tributavel
@@ -27,7 +27,7 @@ class TributacaoIbsUf
     public function __construct(Tributavel $tributavel, ResultadoTributacao $resultadoTributacao)
     {
         $this->tributavel = $tributavel;
-        $this->calculaBaseCalculoIcms = new CalculaBaseCalculoCbsIbs($tributavel, $resultadoTributacao);
+        $this->calculaBaseCalculo = new CalculaBaseCalculoCbsIbs($tributavel, $resultadoTributacao);
     }
 
     public function calcula(): ResultadoCalculoCbsIbs
@@ -37,7 +37,7 @@ class TributacaoIbsUf
 
     private function calculaIbsUf(): ResultadoCalculoCbsIbs
     {
-        $baseCalculo = $this->calculaBaseCalculoIcms->calculaBaseCalculoBase();
+        $baseCalculo = $this->calculaBaseCalculo->calculaBaseCalculoBase();
         $valorIbsUf = $this->calculaValorIbsUf($baseCalculo);
         $valorDiferido = $this->calculaValorDiferido($baseCalculo);
         $percentualEfetivo = $this->calculaAliquotaEfetiva();

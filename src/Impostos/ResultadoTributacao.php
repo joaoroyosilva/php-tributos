@@ -473,6 +473,8 @@ class ResultadoTributacao
         $this->calcularPis();
         $this->calcularCofins();
         $this->calcularIbpt();
+
+        //RTC
         $this->calcularCbs();
         $this->calcularIbsUF();
         $this->calcularIbsMun();
