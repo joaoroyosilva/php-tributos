@@ -31,7 +31,7 @@ class Cst40 extends CstBase
     public function __construct(
         int $origemMercadoria = OrigemMercadoria::Nacional,
         string $tipoDesconto = TipoDesconto::Incondicional,
-        public TipoCalculoIcmsDesonerado $tipoCalculoIcmsDesonerado = TipoCalculoIcmsDesonerado::BasePorDentro
+        public string $tipoCalculoIcmsDesonerado = TipoCalculoIcmsDesonerado::BasePorDentro
     ) {
         parent::__construct($origemMercadoria, $tipoDesconto);
     }

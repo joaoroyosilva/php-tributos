@@ -20,7 +20,7 @@ class ResultadoCalculoFcpSt
      */
     public function __construct(float $baseCalculo, float $valorFcpSt)
     {
-        $this->baseCalculo = $baseCalculo;
+        $this->baseCalculoFcpSt = $baseCalculo;
         $this->valorFcpSt = $valorFcpSt;
     }
 }

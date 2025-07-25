@@ -45,6 +45,11 @@ class Cst90 extends CstBase
     /**
      * @var float
      */
+    public $percentualReducao = 0;
+
+    /**
+     * @var float
+     */
     public $valorIcms = 0;
 
     /**
@@ -188,7 +193,7 @@ class Cst90 extends CstBase
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
 
         $resultadoCalculoFcpSt = $facade->calculaFcpSt();
-        $this->valorBcFcpSt = $resultadoCalculoFcpSt->baseCalculo;
+        $this->valorBcFcpSt = $resultadoCalculoFcpSt->baseCalculoFcpSt;
         $this->valorFcpSt = $resultadoCalculoFcpSt->valorFcpSt;
     }
 }

@@ -7,10 +7,9 @@ use PhpTributos\Flags\Cst;
 use PhpTributos\Flags\OrigemMercadoria;
 use PhpTributos\Flags\TipoCalculoIcmsDesonerado;
 use PhpTributos\Flags\TipoDesconto;
-use PhpTributos\Impostos\Cst\Base\CstBase;
 use PhpTributos\Impostos\Tributavel;
 
-class Cst70 extends CstBase
+class Cst70 extends Cst10
 {
     /**
      * @var Cst
@@ -30,7 +29,7 @@ class Cst70 extends CstBase
     public function __construct(
         int $origemMercadoria = OrigemMercadoria::Nacional,
         string $tipoDesconto = TipoDesconto::Incondicional,
-        public TipoCalculoIcmsDesonerado $tipoCalculoIcmsDesonerado = TipoCalculoIcmsDesonerado::BasePorDentro
+        public string $tipoCalculoIcmsDesonerado = TipoCalculoIcmsDesonerado::BasePorDentro
     ) {
         parent::__construct($origemMercadoria, $tipoDesconto);
     }
