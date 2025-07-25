@@ -862,40 +862,6 @@ class ResultadoTributacao
         $this->valorIss = $result->valor;
     }
 
-    private function cstGeraDifal($cst): bool
-    {
-        return (
-            $cst == Cst::Cst00 ||
-            $cst == Cst::Cst20 ||
-            $cst == Cst::Cst40 ||
-            $cst == Cst::Cst41 ||
-            $cst == Cst::Cst60
-        );
-    }
-
-    private function calculaFcp(): void
-    {
-        $this->tributacaoFcp = new TributacaoFcp($this->produto, $this->tipoDesconto);
-        $resultado = $this->tributacaoFcp->calcula();
-
-        $this->fcp = $resultado->valor;
-        $this->valorBcFcp = $resultado->baseCalculo;
-    }
-
-    private function calculaIbpt(): void
-    {
-        $this->ibpt = new TributacaoIbpt($this->produto);
-
-        /** @var ResultadoCalculoIbpt */
-        $resultado = $this->ibpt->calcula();
-
-        $this->valorTributacaoFederal = $resultado->tributacaoFederal;
-        $this->valorTributacaoFederalImportados = $resultado->tributacaoFederalImportados;
-        $this->valorTributacaoEstadual = $resultado->tributacaoEstadual;
-        $this->valorTributacaoMunicipal = $resultado->tributacaoMunicipal;
-        $this->valorTotalTributos = $resultado->valorTotalTributos;
-    }
-
     private function calcularCbs(): void
     {
         $this->tributacaoCbs = new TributacaoCbs($this->produto, $this);
@@ -947,4 +913,16 @@ class ResultadoTributacao
             $csosn == Csosn::Csosn500
         );
     }
+
+    private function cstGeraDifal($cst): bool
+    {
+        return (
+            $cst == Cst::Cst00 ||
+            $cst == Cst::Cst20 ||
+            $cst == Cst::Cst40 ||
+            $cst == Cst::Cst41 ||
+            $cst == Cst::Cst60
+        );
+    }
+
 }
