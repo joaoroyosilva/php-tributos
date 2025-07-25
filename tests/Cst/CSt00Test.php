@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class Cst00Test extends TestCase
 {
-    public function testaCalculoIcms()
+    public function testCalculoIcms()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;
@@ -23,7 +23,7 @@ class Cst00Test extends TestCase
         $this->assertEquals(180, $cst->valorIcms);
     }
 
-    public function testaCalculoIcmsComDescontoIncondicional()
+    public function testCalculoIcmsComDescontoIncondicional()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;
@@ -38,7 +38,7 @@ class Cst00Test extends TestCase
         $this->assertEquals(180, $cst->valorIcms);
     }
 
-    public function testaCalculoIcmsComDescontoCondicional()
+    public function testCalculoIcmsComDescontoCondicional()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;

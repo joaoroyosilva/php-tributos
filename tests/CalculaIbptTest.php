@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaIbptTest extends TestCase
 {
-    public function testaCalculoIbpt()
+    public function testCalculoIbpt()
     {
         $produto = new Produto();
         $produto->valorProduto = 1000;

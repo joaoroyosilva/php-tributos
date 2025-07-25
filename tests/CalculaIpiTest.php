@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaIpiTest extends TestCase
 {
-    public function testaCalculoIpi()
+    public function testCalculoIpi()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;
@@ -23,7 +23,7 @@ class CalculaIpiTest extends TestCase
         $this->assertEquals(170, $resultado->valor);
     }
 
-    public function testaCalculoIpiComQuantidade2()
+    public function testCalculoIpiComQuantidade2()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -36,7 +36,7 @@ class CalculaIpiTest extends TestCase
         $this->assertEquals(340, $resultado->valor);
     }
 
-    public function testaCalculoIpiComDescontoCondicional()
+    public function testCalculoIpiComDescontoCondicional()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -50,7 +50,7 @@ class CalculaIpiTest extends TestCase
         $this->assertEquals(480, $resultado->valor);
     }
 
-    public function testaCalculoIpiComFrete()
+    public function testCalculoIpiComFrete()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -65,7 +65,7 @@ class CalculaIpiTest extends TestCase
         $this->assertEquals(656.03, $resultado->valor);
     }
 
-    public function testaCalculoIpiComOutrasDespesasESeguro()
+    public function testCalculoIpiComOutrasDespesasESeguro()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -82,7 +82,7 @@ class CalculaIpiTest extends TestCase
         $this->assertEquals(553.48, $resultado->valor);
     }
 
-    public function testaCalculoIpiEmNfce()
+    public function testCalculoIpiEmNfce()
     {
         $produto = new Produto();
         $produto->documento = Documento::NFCe;

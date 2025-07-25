@@ -33,10 +33,13 @@ use PhpTributos\Impostos\Cst\Cst51;
 use PhpTributos\Impostos\Cst\Cst60;
 use PhpTributos\Impostos\Cst\Cst70;
 use PhpTributos\Impostos\Cst\Cst90;
+use PhpTributos\Impostos\Tributacoes\TributacaoCbs;
 use PhpTributos\Impostos\Tributacoes\TributacaoCofins;
 use PhpTributos\Impostos\Tributacoes\TributacaoDifal;
 use PhpTributos\Impostos\Tributacoes\TributacaoFcp;
 use PhpTributos\Impostos\Tributacoes\TributacaoIbpt;
+use PhpTributos\Impostos\Tributacoes\TributacaoIbsMun;
+use PhpTributos\Impostos\Tributacoes\TributacaoIbsUf;
 use PhpTributos\Impostos\Tributacoes\TributacaoIpi;
 use PhpTributos\Impostos\Tributacoes\TributacaoIssqn;
 use PhpTributos\Impostos\Tributacoes\TributacaoPis;
@@ -87,6 +90,21 @@ class ResultadoTributacao
      * @var TributacaoIbpt
      */
     private $ibpt;
+
+    /**
+     * @var TributacaoCbs
+     */
+    private $tributacaoCbs;
+
+    /**
+     * @var TributacaoIbsUf
+     */
+    private $tributacaoIbsUf;
+
+    /**
+     * @var TributacaoIbsMun
+     */
+    private $tributacaoIbsMun;
 
     /**
      * @var float
@@ -353,6 +371,78 @@ class ResultadoTributacao
      */
     private $tipoDesconto;
 
+    /**
+     * @var float
+     *  */
+    public float $baseCalculoCbs = 0;
+    /**
+     * @var float
+     */
+    public float $valorCbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorDiferidoCbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $percentualEfetivoCbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorEfetivoCbs = 0;
+
+    /**
+     * @var float
+     *  */
+    public float $baseCalculoIbsUF = 0;
+    /**
+     * @var float
+     */
+    public float $valorIbsUF = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorDiferidoIbsUF = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $percentualEfetivoIbsUF = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorEfetivoIbsUF = 0;
+
+    /**
+     * @var float
+     *  */
+    public float $baseCalculoIbsMun = 0;
+    /**
+     * @var float
+     */
+    public float $valorIbsMun = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorDiferidoIbsMun = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $percentualEfetivoIbsMun = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorEfetivoIbsMun = 0;
+
     public function __construct(
         Tributavel $produto,
         int $crt,
@@ -383,6 +473,9 @@ class ResultadoTributacao
         $this->calcularPis();
         $this->calcularCofins();
         $this->calcularIbpt();
+        $this->calcularCbs();
+        $this->calcularIbsUF();
+        $this->calcularIbsMun();
 
         return $this;
     }
@@ -801,6 +894,48 @@ class ResultadoTributacao
         $this->valorTributacaoEstadual = $resultado->tributacaoEstadual;
         $this->valorTributacaoMunicipal = $resultado->tributacaoMunicipal;
         $this->valorTotalTributos = $resultado->valorTotalTributos;
+    }
+
+    private function calcularCbs(): void
+    {
+        $this->tributacaoCbs = new TributacaoCbs($this->produto, $this);
+
+        /** @var ResultadoCalculoCbs */
+        $resultado = $this->tributacaoCbs->calcula();
+
+        $this->baseCalculoCbs = $resultado->baseCalculo;
+        $this->valorCbs = $resultado->valor;
+        $this->valorDiferidoCbs = $resultado->valorDiferido;
+        $this->percentualEfetivoCbs = $resultado->percentualEfetivo;
+        $this->valorEfetivoCbs = $resultado->valorEfetivo;
+    }
+
+    private function calcularIbsUf(): void
+    {
+        $this->tributacaoIbsUf = new TributacaoIbsUf($this->produto, $this);
+
+        /** @var ResultadoCalculoIbsUf */
+        $resultado = $this->tributacaoIbsUf->calcula();
+
+        $this->baseCalculoIbsUF = $resultado->baseCalculo;
+        $this->valorIbsUF = $resultado->valor;
+        $this->valorDiferidoIbsUF = $resultado->valorDiferido;
+        $this->percentualEfetivoIbsUF = $resultado->percentualEfetivo;
+        $this->valorEfetivoIbsUF = $resultado->valorEfetivo;
+    }
+
+    private function calcularIbsMun(): void
+    {
+        $this->tributacaoIbsMun = new TributacaoIbsMun($this->produto, $this);
+
+        /** @var ResultadoCalculoIbsMun */
+        $resultado = $this->tributacaoIbsMun->calcula();
+
+        $this->baseCalculoIbsMun = $resultado->baseCalculo;
+        $this->valorIbsMun = $resultado->valor;
+        $this->valorDiferidoIbsMun = $resultado->valorDiferido;
+        $this->percentualEfetivoIbsMun = $resultado->percentualEfetivo;
+        $this->valorEfetivoIbsMun = $resultado->valorEfetivo;
     }
 
     private function csosnGeraDifal($csosn): bool

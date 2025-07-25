@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaIcmsTest extends TestCase
 {
-    public function testaCalculoIcms()
+    public function testCalculoIcms()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;
@@ -22,7 +22,7 @@ class CalculaIcmsTest extends TestCase
         $this->assertEquals(170, $resultado->valor);
     }
 
-    public function testaCalculoIcmsComQuantidade2()
+    public function testCalculoIcmsComQuantidade2()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -35,7 +35,7 @@ class CalculaIcmsTest extends TestCase
         $this->assertEquals(340, $resultado->valor);
     }
 
-    public function testaCalculoIcmsComDescontoCondicional()
+    public function testCalculoIcmsComDescontoCondicional()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -49,7 +49,7 @@ class CalculaIcmsTest extends TestCase
         $this->assertEquals(600, $resultado->valor);
     }
 
-    public function testaCalculoIcmsComReducao()
+    public function testCalculoIcmsComReducao()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -64,7 +64,7 @@ class CalculaIcmsTest extends TestCase
         $this->assertEquals(262.5, $resultado->valor);
     }
 
-    public function testaCalculoIcmsComFrete()
+    public function testCalculoIcmsComFrete()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -80,7 +80,7 @@ class CalculaIcmsTest extends TestCase
         $this->assertEquals(604.52, $resultado->valor);
     }
 
-    public function testaCalculoIcmsComOutrasDespesasESeguro()
+    public function testCalculoIcmsComOutrasDespesasESeguro()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;

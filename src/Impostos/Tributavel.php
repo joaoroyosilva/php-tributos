@@ -219,4 +219,49 @@ abstract class Tributavel
      * @var float
      */
     public $percentualMunicipal = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualCbs = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoCbs = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualDiferimentoCbs = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualIbsUf = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoIbsUf = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualDiferimentoIbsUf = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualIbsMun = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoIbsMun = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualDiferimentoIbsMun = 0;
 }

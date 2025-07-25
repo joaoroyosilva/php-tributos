@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class Cst30Test extends TestCase
 {
-    public function testaCalculoIcmsDesonerado()
+    public function testCalculoIcmsDesonerado()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;

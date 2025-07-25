@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaIcmsCreditoTest extends TestCase
 {
-    public function testaCalculoCredito()
+    public function testCalculoCredito()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 1;
@@ -22,7 +22,7 @@ class CalculaIcmsCreditoTest extends TestCase
         $this->assertEquals(170, $resultado->valor);
     }
 
-    public function testaCalculoCreditoComQuantidade2()
+    public function testCalculoCreditoComQuantidade2()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -35,7 +35,7 @@ class CalculaIcmsCreditoTest extends TestCase
         $this->assertEquals(340, $resultado->valor);
     }
 
-    public function testaCalculoCreditoComDescontoCondicional()
+    public function testCalculoCreditoComDescontoCondicional()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -49,7 +49,7 @@ class CalculaIcmsCreditoTest extends TestCase
         $this->assertEquals(600, $resultado->valor);
     }
 
-    public function testaCalculoCreditoComReducao()
+    public function testCalculoCreditoComReducao()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -64,7 +64,7 @@ class CalculaIcmsCreditoTest extends TestCase
         $this->assertEquals(262.5, $resultado->valor);
     }
 
-    public function testaCalculoCreditoComFrete()
+    public function testCalculoCreditoComFrete()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;
@@ -80,7 +80,7 @@ class CalculaIcmsCreditoTest extends TestCase
         $this->assertEquals(604.52, $resultado->valor);
     }
 
-    public function testaCalculoCreditoComOutrasDespesasESeguro()
+    public function testCalculoCreditoComOutrasDespesasESeguro()
     {
         $produto = new Produto();
         $produto->quantidadeProduto = 2;

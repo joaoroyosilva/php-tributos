@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculoCofinsTest extends TestCase
 {
-    public function testaCalculoCofins()
+    public function testCalculoCofins()
     {
         $produto = new Produto();
         $produto->percentualCofins = 0.65;
@@ -22,7 +22,7 @@ class CalculoCofinsTest extends TestCase
         $this->assertEquals(6.5, $resultado->valor);
     }
 
-    public function testaCalculoCofinsComIpi()
+    public function testCalculoCofinsComIpi()
     {
         $produto = new Produto();
         $produto->percentualCofins = 0.65;
@@ -37,7 +37,7 @@ class CalculoCofinsTest extends TestCase
         $this->assertEquals(6.57, $resultado->valor);
     }
 
-    public function testaCalculoCofinsComIpiZero()
+    public function testCalculoCofinsComIpiZero()
     {
         $produto = new Produto();
         $produto->percentualCofins = 0.65;

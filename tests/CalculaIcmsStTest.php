@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaIcmsStTest extends TestCase
 {
-    public function testaCalculoIcmsSt()
+    public function testCalculoIcmsSt()
     {
         $produto = new Produto();
         $produto->percentualIcms = 18;

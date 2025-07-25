@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaFcpTest extends TestCase
 {
-    public function testaCalculaFcp()
+    public function testCalculaFcp()
     {
         $produto = new Produto();
         $produto->percentualFcp = 2;

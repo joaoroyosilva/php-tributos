@@ -1,0 +1,89 @@
+<?php
+
+namespace PhpTributos\Impostos\Tributacoes;
+
+use PhpTributos\Impostos\CalculosDeBc\CalculaBaseCalculoCbsIbs;
+use PhpTributos\Impostos\ResultadoCalculoCbsIbs;
+use PhpTributos\Impostos\ResultadoTributacao;
+use PhpTributos\Impostos\Tributavel;
+
+class TributacaoCbs
+{
+    /**
+     * @var CalculaBaseCalculoCbsIbs
+     */
+    private $calculaBaseCalculoIcms;
+
+    /**
+     * @var Tributavel
+     */
+    private $tributavel;
+
+    /**
+     * @param Tributavel $tributavel
+     * @param ResultadoTributacao $resultadoTributacao
+     */
+    public function __construct(Tributavel $tributavel, ResultadoTributacao $resultadoTributacao)
+    {
+        $this->tributavel = $tributavel;
+        $this->calculaBaseCalculoIcms = new CalculaBaseCalculoCbsIbs($tributavel, $resultadoTributacao);
+    }
+
+    public function calcula(): ResultadoCalculoCbsIbs
+    {
+        return $this->calculaCbsIbs();
+    }
+
+    private function calculaCbsIbs(): ResultadoCalculoCbsIbs
+    {
+        $baseCalculo = $this->calculaBaseCalculoIcms->calculaBaseCalculoBase();
+        $valorCbs = $this->calculaValorCbs($baseCalculo);
+        $valorDiferido = $this->calculaValorDiferido($baseCalculo);
+        $percentualEfetivo = $this->calculaAliquotaEfetiva();
+        $valorEfetivo = $this->calculaValorEfetivo($baseCalculo, $percentualEfetivo);
+
+        return new ResultadoCalculoCbsIbs(
+            $baseCalculo,
+            $valorCbs,
+            $valorDiferido,
+            $percentualEfetivo,
+            $valorEfetivo
+        );
+    }
+
+    private function calculaValorCbs(float $baseCalculo): float
+    {
+        return round(
+            ($baseCalculo * $this->tributavel->percentualCbs) / 100,
+            2,
+            PHP_ROUND_HALF_EVEN
+        );
+    }
+
+    private function calculaValorDiferido(float $baseCalculo): float
+    {
+        return round(
+            ($baseCalculo * $this->tributavel->percentualDiferimentoCbs) / 100,
+            2,
+            PHP_ROUND_HALF_EVEN
+        );
+    }
+
+    private function calculaAliquotaEfetiva(): float
+    {
+        if ($this->tributavel->reducaoCbs == 0) {
+            return 0;
+        }
+
+        return round(
+            $this->tributavel->percentualCbs / (1 - $this->tributavel->reducaoCbs / 100),
+            2,
+            PHP_ROUND_HALF_EVEN
+        );
+    }
+
+    private function calculaValorEfetivo(float $baseCalculo, float $percentualEfetivo): float
+    {
+        return round(($baseCalculo * $percentualEfetivo) / 100, 2, PHP_ROUND_HALF_EVEN);
+    }
+}

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculoPisTest extends TestCase
 {
-    public function testaCalculoPis()
+    public function testCalculoPis()
     {
         $produto = new Produto();
         $produto->percentualPis = 1.65;
@@ -22,7 +22,7 @@ class CalculoPisTest extends TestCase
         $this->assertEquals(16.5, $resultado->valor);
     }
 
-    public function testaCalculoPisComIpi()
+    public function testCalculoPisComIpi()
     {
         $produto = new Produto();
         $produto->percentualPis = 1.65;
@@ -37,7 +37,7 @@ class CalculoPisTest extends TestCase
         $this->assertEquals(16.67, $resultado->valor);
     }
 
-    public function testaCalculoPisComIpiZero()
+    public function testCalculoPisComIpiZero()
     {
         $produto = new Produto();
         $produto->percentualPis = 1.65;

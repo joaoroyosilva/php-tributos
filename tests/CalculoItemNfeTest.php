@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculoItemNfeTest extends TestCase
 {
-    public function testaCalculoItem()
+    public function testCalculoItem()
     {
         $produto = new Produto();
         $produto->valorProduto = 1000;

@@ -18,7 +18,7 @@ class Csosn101Test extends TestCase
         return $produto;
     }
 
-    public function testaCalculoDeCsosn101()
+    public function testCalculoDeCsosn101()
     {
         $produto = $this->criaProduto();
 
@@ -29,7 +29,7 @@ class Csosn101Test extends TestCase
         $this->assertEquals(17, $csosn->percentualCredito);
     }
 
-    public function testaCalculoComDescontoIncondicional()
+    public function testCalculoComDescontoIncondicional()
     {
         $produto = $this->criaProduto();
         $produto->desconto = 100;
@@ -41,7 +41,7 @@ class Csosn101Test extends TestCase
         $this->assertEquals(17, $csosn->percentualCredito);
     }
 
-    public function testaCalculoComDescontoCondicional()
+    public function testCalculoComDescontoCondicional()
     {
         $produto = $this->criaProduto();
         $produto->desconto = 100;

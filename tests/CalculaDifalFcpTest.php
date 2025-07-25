@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculaDifalFcpTest extends TestCase
 {
-    public function testaCalculaDifalJuntoComFcp()
+    public function testCalculaDifalJuntoComFcp()
     {
         $produto = new Produto();
         $produto->valorProduto = 845;

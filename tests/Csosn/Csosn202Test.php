@@ -23,7 +23,7 @@ class Csosn202Test extends TestCase
         return $produto;
     }
 
-    public function testaCalculo()
+    public function testCalculo()
     {
         $produto = $this->criaProduto();
         $csosn = new Csosn202();
@@ -35,7 +35,7 @@ class Csosn202Test extends TestCase
         $this->assertEquals(219.6, round($csosn->valorIcmsSt, 2));
     }
 
-    public function testaCalculoComDescontoCondicional()
+    public function testCalculoComDescontoCondicional()
     {
         $produto = $this->criaProduto();
         $produto->valorProduto = 1900;

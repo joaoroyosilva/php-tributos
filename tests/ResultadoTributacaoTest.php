@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResultadoTributacaoTest extends TestCase
 {
-    public function testaResultadoTributacao()
+    public function testResultadoTributacao()
     {
         $produto = new Produto();
         $produto->cst = Cst::Cst00;
@@ -27,6 +27,10 @@ class ResultadoTributacaoTest extends TestCase
         $produto->percentualDifalInterna = 18;
         $produto->percentualDifalInterstadual = 12;
 
+        //RTC
+        $produto->percentualCbs = 0.9;
+        $produto->percentualIbsUf = 0.1;
+
         $tributacao = new ResultadoTributacao(
             $produto,
             Crt::RegimeNormal,
@@ -38,5 +42,8 @@ class ResultadoTributacaoTest extends TestCase
 
         $this->assertEquals(2.07, $result->fcp);
         $this->assertEquals(37.26, $result->valorIcms);
+
+        $this->assertEquals(1.51, $result->valorCbs);
+        $this->assertEquals(0.17, $result->valorIbsUF);
     }
 }
