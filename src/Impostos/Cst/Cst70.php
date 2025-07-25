@@ -34,7 +34,6 @@ class Cst70 extends Cst10
         parent::__construct($origemMercadoria, $tipoDesconto);
     }
 
-
     public function calcula(Tributavel $tributavel): void
     {
         parent::calcula($tributavel);

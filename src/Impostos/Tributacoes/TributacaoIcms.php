@@ -2,7 +2,6 @@
 
 namespace PhpTributos\Impostos\Tributacoes;
 
-use PhpTributos\Flags\TipoDesconto;
 use PhpTributos\Impostos\CalculosDeBc\CalculaBaseCalculoIcms;
 use PhpTributos\Impostos\ResultadoCalculoIcms;
 use PhpTributos\Impostos\Tributavel;
@@ -20,18 +19,12 @@ class TributacaoIcms
     private $tributavel;
 
     /**
-     * @var string TipoDesconto
-     */
-    private $tipoDesconto;
-
-    /**
      * @param Tributavel $tributavel
      * @param string $tipoDesconto
      */
     public function __construct(Tributavel $tributavel, string $tipoDesconto)
     {
         $this->tributavel = $tributavel;
-        $this->tipoDesconto = $tipoDesconto;
         $this->calculaBaseCalculoIcms = new CalculaBaseCalculoIcms($tributavel, $tipoDesconto);
     }
 
