@@ -783,6 +783,10 @@ class ResultadoTributacao
 
     private function calcularFcp()
     {
+        if ($this->crt != Crt::RegimeNormal && $this->crt != Crt::SimplesNacionalExcesso) {
+            return;
+        }
+
         $this->tributacaoFcp = new TributacaoFcp($this->produto, $this->tipoDesconto);
         $result = $this->tributacaoFcp->calcula();
 

@@ -72,11 +72,11 @@ class TributacaoCbs
     private function calculaAliquotaEfetiva(): float
     {
         if ($this->tributavel->reducaoCbs == 0) {
-            return 0;
+            return $this->tributavel->percentualCbs;
         }
 
         return round(
-            $this->tributavel->percentualCbs / (1 - $this->tributavel->reducaoCbs / 100),
+            $this->tributavel->percentualCbs * (1 - $this->tributavel->reducaoCbs / 100),
             2,
             PHP_ROUND_HALF_EVEN
         );
