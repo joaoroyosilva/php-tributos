@@ -83,6 +83,42 @@ class ResultadoTributacaoTest extends TestCase
         $this->assertEquals(0.17, $result->valorIbsUF);
     }
 
+    public function testResultadoNaoTributacaoComReducaoCbs()
+    {
+        $produto = new Produto();
+        $produto->cst = Cst::Cst41;
+        $produto->csosn = Csosn::Csosn400;
+        $produto->percentualCofins = 15;
+        $produto->percentualFcp = 0;
+        $produto->percentualIcms = 18;
+        $produto->percentualPis = 5;
+        $produto->quantidadeProduto = 9;
+        $produto->valorProduto = 23;
+        $produto->percentualDifalInterna = 18;
+        $produto->percentualDifalInterstadual = 12;
+
+        //RTC
+        $produto->percentualCbs = 0.9;
+        $produto->percentualIbsUf = 0.1;
+        $produto->reducaoCbs = 60;
+
+        $tributacao = new ResultadoTributacao(
+            $produto,
+            Crt::RegimeNormal,
+            TipoOperacao::OperacaoInterna,
+            TipoPessoa::Juridica
+        );
+
+        $result = $tributacao->calcular();
+
+        $this->assertEquals(0, $result->fcp);
+        $this->assertEquals(0, $result->valorIcms);
+
+        $this->assertEquals(1.86, $result->valorCbs);
+        $this->assertEquals(0.36, $result->percentualEfetivoCbs);
+        $this->assertEquals(0.21, $result->valorIbsUF);
+    }
+
     public function testResultadoTributacaoSimplesNacional()
     {
         $produto = new Produto();
