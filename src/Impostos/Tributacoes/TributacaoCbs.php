@@ -64,10 +64,14 @@ class TributacaoCbs
 
     private function calculaValorDiferido(float $baseCalculo): float
     {
+        if ($this->tributavel->percentualDiferimentoCbs == 0) {
+            return 0;
+        }
+
         return round(
             ($baseCalculo)
-            * (1 - $this->tributavel->percentualCbs)
-            * (1 - $this->tributavel->percentualDiferimentoCbs),
+            * (1 - $this->tributavel->percentualCbs / 100)
+            * (1 - $this->tributavel->percentualDiferimentoCbs / 100),
             2,
             PHP_ROUND_HALF_EVEN
         );

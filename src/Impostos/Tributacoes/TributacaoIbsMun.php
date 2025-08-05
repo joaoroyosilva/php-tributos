@@ -65,10 +65,14 @@ class TributacaoIbsMun
 
     private function calculaValorDiferido(float $baseCalculo): float
     {
+        if ($this->tributavel->percentualDiferimentoIbsMun == 0) {
+            return 0;
+        }
+
         return round(
             ($baseCalculo)
-            * (1 - $this->tributavel->percentualIbsMun)
-            * (1 - $this->tributavel->percentualDiferimentoIbsMun),
+            * (1 - $this->tributavel->percentualIbsMun / 100)
+            * (1 - $this->tributavel->percentualDiferimentoIbsMun / 100),
             2,
             PHP_ROUND_HALF_EVEN
         );
