@@ -71,8 +71,18 @@ class TributacaoCbs
 
     private function calculaAliquotaEfetiva(): float
     {
-        if ($this->tributavel->reducaoCbs == 0) {
+        if ($this->tributavel->reducaoCbs == 0 && $this->tributavel->percentualRedutorCompraGov == 0) {
             return $this->tributavel->percentualCbs;
+        }
+
+        if ($this->tributavel->percentualRedutorCompraGov > 0) {
+            return round(
+                $this->tributavel->percentualCbs
+                * (1 - $this->tributavel->reducaoCbs / 100)
+                * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
+                2,
+                PHP_ROUND_HALF_EVEN
+            );
         }
 
         return round(

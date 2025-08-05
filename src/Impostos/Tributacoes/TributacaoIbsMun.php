@@ -72,9 +72,21 @@ class TributacaoIbsMun
 
     private function calculaAliquotaEfetiva(): float
     {
-        if ($this->tributavel->reducaoIbsMun == 0) {
-            return $this->tributavel->percentualIbsMun;
+        if ($this->tributavel->reducaoIbsMun == 0 && $this->tributavel->percentualRedutorCompraGov == 0) {
+            return $this->tributavel->reducaoIbsMun;
         }
+
+        if ($this->tributavel->percentualRedutorCompraGov > 0) {
+            return round(
+                $this->tributavel->reducaoIbsMun
+                * (1 - $this->tributavel->reducaoIbsMun / 100)
+                * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
+                2,
+                PHP_ROUND_HALF_EVEN
+            );
+        }
+
+
 
         return round(
             $this->tributavel->percentualIbsMun * (1 - $this->tributavel->reducaoIbsMun / 100),

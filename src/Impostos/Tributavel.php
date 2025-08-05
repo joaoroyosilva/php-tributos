@@ -233,6 +233,11 @@ abstract class Tributavel
     /**
      * @var float
      */
+    public $percentualRedutorCompraGov = 0;
+
+    /**
+     * @var float
+     */
     public $percentualDiferimentoCbs = 0;
 
     /**

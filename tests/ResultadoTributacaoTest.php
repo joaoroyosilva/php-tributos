@@ -152,4 +152,37 @@ class ResultadoTributacaoTest extends TestCase
         $this->assertEquals(0.9, $result->percentualEfetivoCbs);
         $this->assertEquals(0.21, $result->valorIbsUF);
     }
+
+    public function testResultadoTributacaoComCompraGov()
+    {
+        $produto = new Produto();
+        $produto->cst = Cst::Cst00;
+        $produto->csosn = Csosn::Csosn102;
+        $produto->percentualCofins = 15;
+        $produto->percentualFcp = 1;
+        $produto->percentualIcms = 18;
+        $produto->percentualPis = 5;
+        $produto->quantidadeProduto = 9;
+        $produto->valorProduto = 23;
+        $produto->percentualDifalInterna = 18;
+        $produto->percentualDifalInterstadual = 12;
+
+        //RTC
+        $produto->percentualCbs = 10;
+        $produto->reducaoCbs = 40;
+        $produto->percentualRedutorCompraGov = 5;
+
+        $tributacao = new ResultadoTributacao(
+            $produto,
+            Crt::RegimeNormal,
+            TipoOperacao::OperacaoInterna,
+            TipoPessoa::Juridica
+        );
+
+        $result = $tributacao->calcular();
+
+
+        $this->assertEquals(5.7, $result->percentualEfetivoCbs);
+        $this->assertEquals(16.77, $result->valorCbs);
+    }
 }
