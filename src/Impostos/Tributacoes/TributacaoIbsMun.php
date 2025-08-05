@@ -75,7 +75,7 @@ class TributacaoIbsMun
     private function calculaValorCreditoPresumido(float $valorIbs): float
     {
         return round(
-            ($valorIbs * $this->tributavel->percentualCreditoPresumidoCbsIbs) / 100,
+            ($valorIbs * $this->tributavel->percentualCreditoPresumidoIbs) / 100,
             2,
             PHP_ROUND_HALF_EVEN
         );
