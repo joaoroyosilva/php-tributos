@@ -66,7 +66,9 @@ class TributacaoIbsMun
     private function calculaValorDiferido(float $baseCalculo): float
     {
         return round(
-            ($baseCalculo * $this->tributavel->percentualDiferimentoIbsMun) / 100,
+            ($baseCalculo)
+            * (1 - $this->tributavel->percentualIbsMun)
+            * (1 - $this->tributavel->percentualDiferimentoIbsMun),
             2,
             PHP_ROUND_HALF_EVEN
         );
