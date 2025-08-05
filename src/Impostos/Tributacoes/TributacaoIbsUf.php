@@ -41,7 +41,7 @@ class TributacaoIbsUf
         $valorIbsUf = $this->calculaValorIbsUf($baseCalculo);
         $valorDiferido = $this->calculaValorDiferido($baseCalculo);
         $percentualEfetivo = $this->calculaAliquotaEfetiva();
-        $valorEfetivo = $this->calculaValorEfetivo($baseCalculo, $percentualEfetivo);
+        $valorEfetivo = $this->calculaValorEfetivo($baseCalculo, $percentualEfetivo, $valorDiferido);
 
         return new ResultadoCalculoCbsIbs(
             $baseCalculo,
@@ -95,8 +95,12 @@ class TributacaoIbsUf
         );
     }
 
-    private function calculaValorEfetivo(float $baseCalculo, float $percentualEfetivo): float
+    private function calculaValorEfetivo(float $baseCalculo, float $percentualEfetivo, float $valorDiferido): float
     {
-        return round(($baseCalculo * $percentualEfetivo) / 100, 2, PHP_ROUND_HALF_EVEN);
+        return round(
+            (($baseCalculo * $percentualEfetivo) / 100) - $valorDiferido,
+            2,
+            PHP_ROUND_HALF_EVEN
+        );
     }
 }
