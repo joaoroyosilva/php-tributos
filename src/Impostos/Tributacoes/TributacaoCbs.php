@@ -70,8 +70,8 @@ class TributacaoCbs
 
         return round(
             ($baseCalculo)
-            * (1 - $this->tributavel->percentualCbs / 100)
-            * (1 - $this->tributavel->percentualDiferimentoCbs / 100),
+            * ($this->tributavel->percentualCbs / 100)
+            * ($this->tributavel->percentualDiferimentoCbs / 100),
             2,
             PHP_ROUND_HALF_EVEN
         );

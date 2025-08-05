@@ -71,8 +71,8 @@ class TributacaoIbsUf
 
         return round(
             ($baseCalculo)
-            * (1 - $this->tributavel->percentualIbsUf / 100)
-            * (1 - $this->tributavel->percentualDiferimentoIbsUf - 100),
+            * ($this->tributavel->percentualIbsUf / 100)
+            * ($this->tributavel->percentualDiferimentoIbsUf - 100),
             2,
             PHP_ROUND_HALF_EVEN
         );
