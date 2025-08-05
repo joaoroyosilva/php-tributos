@@ -14,6 +14,7 @@ class ResultadoCalculoCbsIbs
         public float $valorDiferido = 0,
         public float $percentualEfetivo = 0,
         public float $valorEfetivo = 0,
+        public float $valorCreditoPresumido = 0,
     ) {
     }
 }

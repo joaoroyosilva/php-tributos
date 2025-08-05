@@ -42,13 +42,15 @@ class TributacaoIbsMun
         $valorDiferido = $this->calculaValorDiferido($baseCalculo);
         $percentualEfetivo = $this->calculaAliquotaEfetiva();
         $valorEfetivo = $this->calculaValorEfetivo($baseCalculo, $percentualEfetivo, $valorDiferido);
+        $valorCreditoPresumido = $this->calculaValorCreditoPresumido($valorEfetivo);
 
         return new ResultadoCalculoCbsIbs(
             $baseCalculo,
             $valorIbsMun,
             $valorDiferido,
             $percentualEfetivo,
-            $valorEfetivo
+            $valorEfetivo,
+            $valorCreditoPresumido
         );
     }
 
@@ -65,6 +67,15 @@ class TributacaoIbsMun
     {
         return round(
             ($baseCalculo * $this->tributavel->percentualDiferimentoIbsMun) / 100,
+            2,
+            PHP_ROUND_HALF_EVEN
+        );
+    }
+
+    private function calculaValorCreditoPresumido(float $valorIbs): float
+    {
+        return round(
+            ($valorIbs * $this->tributavel->percentualCreditoPresumidoCbsIbs) / 100,
             2,
             PHP_ROUND_HALF_EVEN
         );

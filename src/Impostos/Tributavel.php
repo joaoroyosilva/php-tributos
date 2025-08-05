@@ -238,6 +238,11 @@ abstract class Tributavel
     /**
      * @var float
      */
+    public $percentualCreditoPresumidoCbsIbs = 0;
+
+    /**
+     * @var float
+     */
     public $percentualDiferimentoCbs = 0;
 
     /**
