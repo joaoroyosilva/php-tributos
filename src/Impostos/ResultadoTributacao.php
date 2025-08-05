@@ -394,6 +394,26 @@ class ResultadoTributacao
      *
      */
     public float $valorEfetivoCbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorCreditoPresumidoCbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorCreditoPresumidoIbs = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorCreditoPresumidoIbsUF = 0;
+    /**
+     * @var float
+     *
+     */
+    public float $valorCreditoPresumidoIbsMun = 0;
 
     /**
      * @var float
@@ -880,6 +900,7 @@ class ResultadoTributacao
         $this->valorDiferidoCbs = $resultado->valorDiferido;
         $this->percentualEfetivoCbs = $resultado->percentualEfetivo;
         $this->valorEfetivoCbs = $resultado->valorEfetivo;
+        $this->valorCreditoPresumidoCbs = $resultado->valorCreditoPresumido;
     }
 
     private function calcularIbsUf(): void
@@ -894,6 +915,8 @@ class ResultadoTributacao
         $this->valorDiferidoIbsUF = $resultado->valorDiferido;
         $this->percentualEfetivoIbsUF = $resultado->percentualEfetivo;
         $this->valorEfetivoIbsUF = $resultado->valorEfetivo;
+        $this->valorCreditoPresumidoIbsUF = $resultado->valorCreditoPresumido;
+        $this->valorCreditoPresumidoIbs += $resultado->valorCreditoPresumido;
     }
 
     private function calcularIbsMun(): void
@@ -908,6 +931,8 @@ class ResultadoTributacao
         $this->valorDiferidoIbsMun = $resultado->valorDiferido;
         $this->percentualEfetivoIbsMun = $resultado->percentualEfetivo;
         $this->valorEfetivoIbsMun = $resultado->valorEfetivo;
+        $this->valorCreditoPresumidoIbsMun = $resultado->valorCreditoPresumido;
+        $this->valorCreditoPresumidoIbs += $resultado->valorCreditoPresumido;
     }
 
     private function csosnGeraDifal($csosn): bool
