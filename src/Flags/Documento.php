@@ -4,11 +4,12 @@ namespace PhpTributos\Flags;
 
 abstract class Documento extends BasicFlag
 {
-    const MFe = 'MFe';
-    const Sat = 'Sat';
-    const MDFe = 'MDFe';
-    const NFCe = 'NFCe';
-    const NFe = 'NFe';
-    const CTe = 'CTe';
-    const CTeOs = 'CTeOs';
+    public const MFe = 'MFe';
+    public const Sat = 'Sat';
+    public const MDFe = 'MDFe';
+    public const NFCe = 'NFCe';
+    public const NFe = 'NFe';
+    public const NFSe = 'NFSe';
+    public const CTe = 'CTe';
+    public const CTeOs = 'CTeOs';
 }
