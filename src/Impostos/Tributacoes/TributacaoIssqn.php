@@ -87,35 +87,32 @@ class TributacaoIssqn
 
     private function calculaValorIssqn(float $baseCalculo): float
     {
-        $valor = $baseCalculo * $this->tributavel->percentualIssqn / 100;
-        return $valor > 10 ? $valor : 0;
+        return round($baseCalculo * $this->tributavel->percentualIssqn / 100, 2);
     }
 
     private function calculaValorRetPis(float $baseCalculo): float
     {
-        return ($baseCalculo * $this->tributavel->percentualRetPis) / 100;
+        return round(($baseCalculo * $this->tributavel->percentualRetPis) / 100, 2);
     }
 
     private function calculaValorRetCofins(float $baseCalculo): float
     {
-        return ($baseCalculo * $this->tributavel->percentualRetCofins) / 100;
+        return round(($baseCalculo * $this->tributavel->percentualRetCofins) / 100, 2);
     }
 
     private function calculaValorRetCsll(float $baseCalculo): float
     {
-        return ($baseCalculo * $this->tributavel->percentualRetCsll) / 100;
+        return round(($baseCalculo * $this->tributavel->percentualRetCsll) / 100, 2);
     }
 
     private function calculaValorRetIrrf(float $baseCalculo): float
     {
-        $valor = $baseCalculo * $this->tributavel->percentualRetIrrf / 100;
-        return $valor > 10 ? $valor : 0;
+        return round($baseCalculo * $this->tributavel->percentualRetIrrf / 100, 2);
     }
 
     private function calculaValorRetInss(float $baseCalculo): float
     {
-        $valor = $baseCalculo * $this->tributavel->percentualRetInss / 100;
-        return $valor > 29 ? $valor : 0;
+        return round($baseCalculo * $this->tributavel->percentualRetInss / 100, 2);
     }
 
     private function calcularValorTotalTributacao(float $baseCalculo): bool
@@ -125,7 +122,6 @@ class TributacaoIssqn
         $this->tributavel->percentualRetCofins +
         $this->tributavel->percentualRetCsll;
 
-        $valor = $baseCalculo * $percentualTotal / 100;
-        return $valor > 10;
+        return round($baseCalculo * $percentualTotal / 100, 2);
     }
 }

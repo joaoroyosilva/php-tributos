@@ -2,8 +2,12 @@
 
 namespace PhpTributos\Impostos;
 
-abstract class ResultadoCalculoIssqn
+class ResultadoCalculoIssqn
 {
+    /**
+     * @var float
+     */
+    public $baseCalculo;
 
     /**
      * @var float

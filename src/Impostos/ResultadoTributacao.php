@@ -878,6 +878,7 @@ class ResultadoTributacao
         $this->issqn = new TributacaoIssqn($this->produto, $this->tipoDesconto);
         $result = $this->issqn->calcula($calcularRetencao);
 
+        $this->baseCalculoIss = $result->baseCalculo;
         $this->baseCalculoInss = $result->baseCalculoInss;
         $this->baseCalculoIrrf = $result->baseCalculoIrrf;
         $this->valorRetCofins = $result->valorRetCofins;

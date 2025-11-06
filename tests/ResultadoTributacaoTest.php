@@ -6,8 +6,10 @@ use PhpTributos\Entidades\Produto;
 use PhpTributos\Flags\Crt;
 use PhpTributos\Flags\Csosn;
 use PhpTributos\Flags\Cst;
+use PhpTributos\Flags\CstPisCofins;
 use PhpTributos\Flags\TipoOperacao;
 use PhpTributos\Flags\TipoPessoa;
+use PhpTributos\Impostos\Cst\Cst10;
 use PhpTributos\Impostos\ResultadoTributacao;
 use PHPUnit\Framework\TestCase;
 
@@ -46,6 +48,28 @@ class ResultadoTributacaoTest extends TestCase
         $this->assertEquals(1.51, $result->valorCbs);
         $this->assertEquals(0.17, $result->valorIbsUF);
     }
+
+    public function testResultadoTributacaoServico()
+    {
+        $produto = new Produto();
+        $produto->isServico = true;
+        $produto->valorProduto = 100;
+        $produto->quantidadeProduto = 1;
+        $produto->percentualIssqn = 2.1105;
+
+        $tributacao = new ResultadoTributacao(
+            $produto,
+            Crt::RegimeNormal,
+            TipoOperacao::OperacaoInterna,
+            TipoPessoa::Juridica
+        );
+
+        $resultado = $tributacao->calcular();
+
+        $this->assertEquals(100, $resultado->baseCalculoIss);
+        $this->assertEquals(2.11, $resultado->valorIss);
+    }
+
 
     public function testResultadoTributacaoComReducaoCbs()
     {

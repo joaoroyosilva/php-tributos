@@ -43,6 +43,25 @@ class CalculoItemNfeTest extends TestCase
         $this->assertEquals(50, $resultado->valorIpi);
         $this->assertEquals(30, $resultado->valorCofins);
         $this->assertEquals(16.5, $resultado->valorPis);
+    }
+    public function testCalculoServico()
+    {
+        $produto = new Produto();
+        $produto->isServico = true;
+        $produto->valorProduto = 1000;
+        $produto->quantidadeProduto = 1;
+        $produto->percentualIssqn = 5;
 
+        $calculo = new ResultadoTributacao(
+            $produto,
+            Crt::RegimeNormal,
+            TipoOperacao::OperacaoInterna,
+            TipoPessoa::Fisica
+        );
+
+        $resultado = $calculo->calcular();
+
+        $this->assertEquals(1000, $resultado->baseCalculoIss);
+        $this->assertEquals(50, $resultado->valorIss);
     }
 }

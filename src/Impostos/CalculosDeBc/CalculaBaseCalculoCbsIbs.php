@@ -27,6 +27,7 @@ class CalculaBaseCalculoCbsIbs extends CalculaBaseCalculoBase
         $this->tributavel->outrasDespesas -
         $this->tributavel->desconto -
         $this->resultadoTributacao->valorIcms -
+        $this->resultadoTributacao->valorIss -
         $this->resultadoTributacao->valorPis -
         $this->resultadoTributacao->valorCofins -
         $this->resultadoTributacao->fcp;
