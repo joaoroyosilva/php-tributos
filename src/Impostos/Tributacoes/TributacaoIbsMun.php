@@ -59,7 +59,6 @@ class TributacaoIbsMun
         return round(
             ($baseCalculo * $this->tributavel->percentualIbsMun) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -74,7 +73,6 @@ class TributacaoIbsMun
             * ($this->tributavel->percentualIbsMun / 100)
             * ($this->tributavel->percentualDiferimentoIbsMun / 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -83,7 +81,6 @@ class TributacaoIbsMun
         return round(
             ($valorIbs * $this->tributavel->percentualCreditoPresumidoIbs) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -99,7 +96,6 @@ class TributacaoIbsMun
                 * (1 - $this->tributavel->reducaoIbsMun / 100)
                 * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
                 2,
-                PHP_ROUND_HALF_EVEN
             );
         }
 
@@ -108,7 +104,6 @@ class TributacaoIbsMun
         return round(
             $this->tributavel->percentualIbsMun * (1 - $this->tributavel->reducaoIbsMun / 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -117,7 +112,6 @@ class TributacaoIbsMun
         return round(
             (($baseCalculo * $percentualEfetivo) / 100) - $valorDiferido,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 }

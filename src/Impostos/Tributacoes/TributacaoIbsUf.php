@@ -11,7 +11,7 @@ use PhpTributos\Impostos\Tributavel;
 class TributacaoIbsUf
 {
     /**
-     * @var CalculaBaseCalculoIbsUf
+     * @var CalculaBaseCalculoCbsIbs
      */
     private $calculaBaseCalculo;
 
@@ -59,7 +59,6 @@ class TributacaoIbsUf
         return round(
             ($baseCalculo * $this->tributavel->percentualIbsUf) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -74,7 +73,6 @@ class TributacaoIbsUf
             * ($this->tributavel->percentualIbsUf / 100)
             * ($this->tributavel->percentualDiferimentoIbsUf - 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -83,7 +81,6 @@ class TributacaoIbsUf
         return round(
             ($valorIbs * $this->tributavel->percentualCreditoPresumidoIbs) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -99,14 +96,12 @@ class TributacaoIbsUf
                 * (1 - $this->tributavel->reducaoIbsUf / 100)
                 * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
                 2,
-                PHP_ROUND_HALF_EVEN
             );
         }
 
         return round(
             $this->tributavel->percentualIbsUf * (1 - $this->tributavel->reducaoIbsUf / 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -115,7 +110,6 @@ class TributacaoIbsUf
         return round(
             (($baseCalculo * $percentualEfetivo) / 100) - $valorDiferido,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 }
