@@ -132,8 +132,8 @@ class ResultadoTributacaoTest extends TestCase
 
 
         $this->assertEquals(125, $result->baseCalculoCbs);
-        $this->assertEquals(1.13, $result->valorCbs);
-        $this->assertEquals(0.13, $result->valorIbsUF);
+        $this->assertEquals(1.13, $result->valorEfetivoCbs);
+        $this->assertEquals(0.13, $result->valorEfetivoIbsUF);
     }
 
     public function testResultadoNaoTributacaoComReducaoCbs()
