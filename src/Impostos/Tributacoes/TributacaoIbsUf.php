@@ -87,7 +87,7 @@ class TributacaoIbsUf
     private function calculaAliquotaEfetiva(): float
     {
         if ($this->tributavel->reducaoIbsUf == 0 && $this->tributavel->percentualRedutorCompraGov == 0) {
-            return $this->tributavel->reducaoIbsUf;
+            return $this->tributavel->percentualIbsUf;
         }
 
         if ($this->tributavel->percentualRedutorCompraGov > 0) {
