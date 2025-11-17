@@ -893,7 +893,7 @@ class ResultadoTributacao
     {
         $this->tributacaoCbs = new TributacaoCbs($this->produto, $this);
 
-        /** @var ResultadoCalculoCbs */
+        /** @var ResultadoCalculoCbsIbs */
         $resultado = $this->tributacaoCbs->calcula();
 
         $this->baseCalculoCbs = $resultado->baseCalculo;
@@ -908,7 +908,7 @@ class ResultadoTributacao
     {
         $this->tributacaoIbsUf = new TributacaoIbsUf($this->produto, $this);
 
-        /** @var ResultadoCalculoIbsUf */
+        /** @var ResultadoCalculoCbsIbs */
         $resultado = $this->tributacaoIbsUf->calcula();
 
         $this->baseCalculoIbsUF = $resultado->baseCalculo;

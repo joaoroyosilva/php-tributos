@@ -58,7 +58,6 @@ class TributacaoCbs
         return round(
             ($baseCalculo * $this->tributavel->percentualCbs) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -73,7 +72,6 @@ class TributacaoCbs
             * ($this->tributavel->percentualCbs / 100)
             * ($this->tributavel->percentualDiferimentoCbs / 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -82,7 +80,6 @@ class TributacaoCbs
         return round(
             ($valorCbs * $this->tributavel->percentualCreditoPresumidoCbs) / 100,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -98,14 +95,12 @@ class TributacaoCbs
                 * (1 - $this->tributavel->reducaoCbs / 100)
                 * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
                 2,
-                PHP_ROUND_HALF_EVEN
             );
         }
 
         return round(
             $this->tributavel->percentualCbs * (1 - $this->tributavel->reducaoCbs / 100),
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 
@@ -114,7 +109,6 @@ class TributacaoCbs
         return round(
             (($baseCalculo * $percentualEfetivo) / 100) - $valorDiferido,
             2,
-            PHP_ROUND_HALF_EVEN
         );
     }
 }
