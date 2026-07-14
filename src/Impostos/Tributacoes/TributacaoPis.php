@@ -46,7 +46,8 @@ class TributacaoPis
             $this->calculaBaseCalculoPis->calculaBaseCalculoBase() + $this->tributavel->valorIpi,
             2
         );
-        $valorPis = round($this->calculaValorPis($baseCalculo), 2);
+        // NT SE/CGNFS-e 007: vPis usa arredondamento bancário (half-even), tolerância R$0,01.
+        $valorPis = round($this->calculaValorPis($baseCalculo), 2, PHP_ROUND_HALF_EVEN);
 
         return new ResultadoCalculoPis($baseCalculo, $valorPis);
     }

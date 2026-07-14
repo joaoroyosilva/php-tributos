@@ -43,7 +43,8 @@ class TributacaoCofins
     private function calculaCofins(): ResultadoCalculoCofins
     {
         $baseCalculo = $this->calculaBaseCalculoCofins->calculaBaseCalculoBase() + $this->tributavel->valorIpi;
-        $valorCofins = round($this->calculaValorCofins($baseCalculo), 2);
+        // NT SE/CGNFS-e 007: vCofins usa arredondamento bancário (half-even), tolerância R$0,01.
+        $valorCofins = round($this->calculaValorCofins($baseCalculo), 2, PHP_ROUND_HALF_EVEN);
 
         return new ResultadoCalculoCofins($baseCalculo, $valorCofins);
     }
