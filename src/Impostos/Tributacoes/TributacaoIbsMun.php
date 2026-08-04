@@ -92,7 +92,7 @@ class TributacaoIbsMun
 
         if ($this->tributavel->percentualRedutorCompraGov > 0) {
             return round(
-                $this->tributavel->reducaoIbsMun
+                $this->tributavel->percentualIbsMun
                 * (1 - $this->tributavel->reducaoIbsMun / 100)
                 * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
                 2,

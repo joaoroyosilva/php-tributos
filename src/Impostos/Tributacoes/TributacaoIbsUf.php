@@ -71,7 +71,7 @@ class TributacaoIbsUf
         return round(
             ($baseCalculo)
             * ($this->tributavel->percentualIbsUf / 100)
-            * ($this->tributavel->percentualDiferimentoIbsUf - 100),
+            * ($this->tributavel->percentualDiferimentoIbsUf / 100),
             2,
         );
     }
@@ -92,7 +92,7 @@ class TributacaoIbsUf
 
         if ($this->tributavel->percentualRedutorCompraGov > 0) {
             return round(
-                $this->tributavel->reducaoIbsUf
+                $this->tributavel->percentualIbsUf
                 * (1 - $this->tributavel->reducaoIbsUf / 100)
                 * (1 - $this->tributavel->percentualRedutorCompraGov / 100),
                 2,

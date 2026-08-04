@@ -43,6 +43,7 @@ use PhpTributos\Impostos\Tributacoes\TributacaoIbsUf;
 use PhpTributos\Impostos\Tributacoes\TributacaoIpi;
 use PhpTributos\Impostos\Tributacoes\TributacaoIssqn;
 use PhpTributos\Impostos\Tributacoes\TributacaoPis;
+use PhpTributos\Impostos\Tributacoes\TributacaoTribRegular;
 
 class ResultadoTributacao
 {
@@ -105,6 +106,11 @@ class ResultadoTributacao
      * @var TributacaoIbsMun
      */
     private $tributacaoIbsMun;
+
+    /**
+     * @var TributacaoTribRegular
+     */
+    private $tributacaoTribRegular;
 
     /**
      * @var float
@@ -463,6 +469,38 @@ class ResultadoTributacao
      */
     public float $valorEfetivoIbsMun = 0;
 
+    /**
+     * Tributação regular (`gTribRegular`) — o que valeria sem a condição resolutiva ou
+     * suspensiva. Sobre a MESMA base do IBS/CBS do item.
+     *
+     * @var float
+     */
+    public float $baseCalculoTribRegular = 0;
+    /**
+     * @var float
+     */
+    public float $percentualEfetivoRegIbsUF = 0;
+    /**
+     * @var float
+     */
+    public float $valorTribRegIbsUF = 0;
+    /**
+     * @var float
+     */
+    public float $percentualEfetivoRegIbsMun = 0;
+    /**
+     * @var float
+     */
+    public float $valorTribRegIbsMun = 0;
+    /**
+     * @var float
+     */
+    public float $percentualEfetivoRegCbs = 0;
+    /**
+     * @var float
+     */
+    public float $valorTribRegCbs = 0;
+
     public function __construct(
         Tributavel $produto,
         int $crt,
@@ -498,6 +536,7 @@ class ResultadoTributacao
         $this->calcularCbs();
         $this->calcularIbsUF();
         $this->calcularIbsMun();
+        $this->calcularTribRegular();
 
         return $this;
     }
@@ -934,6 +973,21 @@ class ResultadoTributacao
         $this->valorEfetivoIbsMun = $resultado->valorEfetivo;
         $this->valorCreditoPresumidoIbsMun = $resultado->valorCreditoPresumido;
         $this->valorCreditoPresumidoIbs += $resultado->valorCreditoPresumido;
+    }
+
+    private function calcularTribRegular(): void
+    {
+        $this->tributacaoTribRegular = new TributacaoTribRegular($this->produto, $this);
+
+        $resultado = $this->tributacaoTribRegular->calcula();
+
+        $this->baseCalculoTribRegular     = $resultado->baseCalculo;
+        $this->percentualEfetivoRegIbsUF  = $resultado->percentualEfetivoRegIbsUf;
+        $this->valorTribRegIbsUF          = $resultado->valorTribRegIbsUf;
+        $this->percentualEfetivoRegIbsMun = $resultado->percentualEfetivoRegIbsMun;
+        $this->valorTribRegIbsMun         = $resultado->valorTribRegIbsMun;
+        $this->percentualEfetivoRegCbs    = $resultado->percentualEfetivoRegCbs;
+        $this->valorTribRegCbs            = $resultado->valorTribRegCbs;
     }
 
     private function csosnGeraDifal($csosn): bool

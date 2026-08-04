@@ -279,4 +279,46 @@ abstract class Tributavel
      * @var float
      */
     public $percentualDiferimentoIbsMun = 0;
+
+    /**
+     * O `cClassTrib` do item exige o grupo `gTribRegular`? (indicador de tributação regular do
+     * catálogo). Quando falso, o cálculo da tributação regular devolve tudo zerado.
+     *
+     * @var bool
+     */
+    public $possuiTributacaoRegular = false;
+
+    /**
+     * Alíquota NOMINAL de IBS estadual que valeria para o `cClassTribReg`. Vem de fora zerada
+     * ou não conforme a geografia — NÃO é `percentualIbsUf`: quando há tributação regular a
+     * alíquota do item é zero por definição, então não há de onde derivar.
+     *
+     * @var float
+     */
+    public $percentualRegularIbsUf = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoRegularIbsUf = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualRegularIbsMun = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoRegularIbsMun = 0;
+
+    /**
+     * @var float
+     */
+    public $percentualRegularCbs = 0;
+
+    /**
+     * @var float
+     */
+    public $reducaoRegularCbs = 0;
 }
