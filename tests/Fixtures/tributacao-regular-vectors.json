@@ -1,0 +1,226 @@
+{
+  "versao": 1,
+  "descricao": "Vetores canonicos da tributacao regular (grupo gTribRegular, NT 2025.002-RTC UB68). Arquivo IDENTICO na php-tributos e na ts-tributos: as duas libs rodam os mesmos vetores nos seus testes, e e isso que sustenta a paridade exigida pela spec rtc-tributacao-regular. Ao editar, editar NOS DOIS repos.",
+  "vetores": [
+    {
+      "id": "V01",
+      "descricao": "550001 (exportacao) com as aliquotas de transicao de 2026, sem reducao propria",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 0.1,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 0,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 0.9,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0.1,
+        "valorTribRegIbsUf": 1.0,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0.9,
+        "valorTribRegCbs": 9.0
+      }
+    },
+    {
+      "id": "V02",
+      "descricao": "Mesma faixa 550xxx com as aliquotas plenas do regime definitivo",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 11.2,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 1.8,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 8.8,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 11.2,
+        "valorTribRegIbsUf": 112.0,
+        "percentualEfetivoRegIbsMun": 1.8,
+        "valorTribRegIbsMun": 18.0,
+        "percentualEfetivoRegCbs": 8.8,
+        "valorTribRegCbs": 88.0
+      }
+    },
+    {
+      "id": "V03",
+      "descricao": "200022 (remessa para contribuinte habilitado na ZFM): reducao de 100% no cClassTribReg zera a aliquota efetiva regular, mas o grupo continua sendo emitido",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 11.2,
+        "reducaoRegularIbsUf": 100,
+        "percentualRegularIbsMun": 1.8,
+        "reducaoRegularIbsMun": 100,
+        "percentualRegularCbs": 8.8,
+        "reducaoRegularCbs": 100
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0,
+        "valorTribRegIbsUf": 0,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0,
+        "valorTribRegCbs": 0
+      }
+    },
+    {
+      "id": "V04",
+      "descricao": "200024 com reducao propria de 60% no cClassTribReg",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 11.2,
+        "reducaoRegularIbsUf": 60,
+        "percentualRegularIbsMun": 1.8,
+        "reducaoRegularIbsMun": 60,
+        "percentualRegularCbs": 8.8,
+        "reducaoRegularCbs": 60
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 4.48,
+        "valorTribRegIbsUf": 44.8,
+        "percentualEfetivoRegIbsMun": 0.72,
+        "valorTribRegIbsMun": 7.2,
+        "percentualEfetivoRegCbs": 3.52,
+        "valorTribRegCbs": 35.2
+      }
+    },
+    {
+      "id": "V05",
+      "descricao": "Reducao com dizima (33,33%): a aliquota efetiva e arredondada a 2 casas ANTES de virar valor",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 0.1,
+        "reducaoRegularIbsUf": 33.33,
+        "percentualRegularIbsMun": 0,
+        "reducaoRegularIbsMun": 33.33,
+        "percentualRegularCbs": 0.9,
+        "reducaoRegularCbs": 33.33
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0.07,
+        "valorTribRegIbsUf": 0.7,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0.6,
+        "valorTribRegCbs": 6.0
+      }
+    },
+    {
+      "id": "V06",
+      "descricao": "Base com centavos: o valor cai para 2 casas",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1234.56,
+        "percentualRegularIbsUf": 0.1,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 0,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 0.9,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0.1,
+        "valorTribRegIbsUf": 1.23,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0.9,
+        "valorTribRegCbs": 11.11
+      }
+    },
+    {
+      "id": "V07",
+      "descricao": "Empate no meio centavo: 1005,00 x 0,1% = 1,005 arredonda para 1,01 nas duas libs. E o vetor que pega Math.round ingenuo do JS (que devolveria 1,00, porque 1.005*100 cai em 100.49999999999999) divergindo do round() do PHP, que faz pre-rounding",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1005.0,
+        "percentualRegularIbsUf": 0.1,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 0.1,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 0.1,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0.1,
+        "valorTribRegIbsUf": 1.01,
+        "percentualEfetivoRegIbsMun": 0.1,
+        "valorTribRegIbsMun": 1.01,
+        "percentualEfetivoRegCbs": 0.1,
+        "valorTribRegCbs": 1.01
+      }
+    },
+    {
+      "id": "V08",
+      "descricao": "Aliquota nominal de 4 casas sem reducao: NAO se arredonda o que nao passou por conta",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 0.0975,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 0,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 0.9,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0.0975,
+        "valorTribRegIbsUf": 0.98,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0.9,
+        "valorTribRegCbs": 9.0
+      }
+    },
+    {
+      "id": "V09",
+      "descricao": "Base zero: as aliquotas continuam declaradas, os valores vao a zero",
+      "entrada": {
+        "possuiTributacaoRegular": true,
+        "baseCalculo": 0,
+        "percentualRegularIbsUf": 11.2,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 1.8,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 8.8,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 11.2,
+        "valorTribRegIbsUf": 0,
+        "percentualEfetivoRegIbsMun": 1.8,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 8.8,
+        "valorTribRegCbs": 0
+      }
+    },
+    {
+      "id": "V10",
+      "descricao": "cClassTrib do item sem o indicador de tributacao regular: nada e calculado, nem as aliquotas. Evita valor orfao de uma configuracao anterior, que viraria rejeicao 1114",
+      "entrada": {
+        "possuiTributacaoRegular": false,
+        "baseCalculo": 1000.0,
+        "percentualRegularIbsUf": 11.2,
+        "reducaoRegularIbsUf": 0,
+        "percentualRegularIbsMun": 1.8,
+        "reducaoRegularIbsMun": 0,
+        "percentualRegularCbs": 8.8,
+        "reducaoRegularCbs": 0
+      },
+      "esperado": {
+        "percentualEfetivoRegIbsUf": 0,
+        "valorTribRegIbsUf": 0,
+        "percentualEfetivoRegIbsMun": 0,
+        "valorTribRegIbsMun": 0,
+        "percentualEfetivoRegCbs": 0,
+        "valorTribRegCbs": 0
+      }
+    }
+  ]
+}

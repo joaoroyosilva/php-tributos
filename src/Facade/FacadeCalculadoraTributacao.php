@@ -16,6 +16,7 @@ use PhpTributos\Impostos\ResultadoCalculoIcmsEfetivo;
 use PhpTributos\Impostos\ResultadoCalculoIcmsSt;
 use PhpTributos\Impostos\ResultadoCalculoIpi;
 use PhpTributos\Impostos\ResultadoCalculoPis;
+use PhpTributos\Impostos\ResultadoCalculoTribRegular;
 use PhpTributos\Impostos\Tributacoes\TributacaoCofins;
 use PhpTributos\Impostos\Tributacoes\TributacaoCreditoIcms;
 use PhpTributos\Impostos\Tributacoes\TributacaoDifal;
@@ -28,6 +29,7 @@ use PhpTributos\Impostos\Tributacoes\TributacaoIcmsEfetivo;
 use PhpTributos\Impostos\Tributacoes\TributacaoIcmsSt;
 use PhpTributos\Impostos\Tributacoes\TributacaoIpi;
 use PhpTributos\Impostos\Tributacoes\TributacaoPis;
+use PhpTributos\Impostos\Tributacoes\TributacaoTribRegular;
 use PhpTributos\Impostos\Tributavel;
 
 class FacadeCalculadoraTributacao
@@ -118,5 +120,15 @@ class FacadeCalculadoraTributacao
     {
         $fcpSt = new TributacaoFcpSt($this->tributavel, $this->tipoDesconto);
         return $fcpSt->calcula();
+    }
+
+    /**
+     * Tributação regular (`gTribRegular`) sobre uma base já apurada — o `vBC` do item, que é a
+     * mesma base do IBS/CBS. Devolve tudo zerado quando o item não tem tributação regular.
+     */
+    public function calculaTribRegular(float $baseCalculo): ResultadoCalculoTribRegular
+    {
+        $tribRegular = new TributacaoTribRegular($this->tributavel);
+        return $tribRegular->calculaSobreBase($baseCalculo);
     }
 }
