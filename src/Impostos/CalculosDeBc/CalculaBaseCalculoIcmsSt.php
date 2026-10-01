@@ -23,46 +23,41 @@ class CalculaBaseCalculoIcmsSt extends CalculaBaseCalculoBase
         $this->tipoDesconto = $tipoDesconto;
     }
 
+    /**
+     * Base do ICMS-ST: (produto + frete + seguro + outras [+ IPI]) ± desconto,
+     * reduzida pela redução ST e acrescida do MVA. Desconto e redução entram uma vez só.
+     */
     public function calculaBaseCalculoBase(): float
     {
         $baseCalculo = $this->tributavel->icmsSobreIpi ?
             parent::calculaBaseDeCalculo() + $this->tributavel->valorIpi :
             parent::calculaBaseDeCalculo();
 
-        $baseCalculo = $baseCalculo -
-            ($baseCalculo * $this->tributavel->percentualReducaoSt / 100);
-
         $baseCalculo = $this->tipoDesconto == TipoDesconto::Condicional ?
         $this->calculaBaseComDescontoCondicional($baseCalculo) :
         $this->calculaBaseComDescontoIncondicional($baseCalculo);
 
-        $baseCalculoSt = $this->calculaBaseCalculoBaseSt($baseCalculo);
-        return $baseCalculoSt;
+        $baseCalculo = $baseCalculo -
+            ($baseCalculo * $this->tributavel->percentualReducaoSt / 100);
+
+        return $this->calculaBaseCalculoBaseSt($baseCalculo);
     }
 
+    /**
+     * Aplica o MVA sobre a base já com desconto e redução ST.
+     */
     public function calculaBaseCalculoBaseSt(float $baseCalculoIcms): float
     {
-        $baseCalculoSt = $this->tipoDesconto == TipoDesconto::Condicional ?
-        $this->calculaBaseComDescontoCondicional($baseCalculoIcms) :
-        $this->calculaBaseComDescontoIncondicional($baseCalculoIcms);
-
-        $baseCalculoSt = $baseCalculoSt * (1 + $this->tributavel->percentualMva / 100);
-
-        return $baseCalculoSt;
+        return $baseCalculoIcms * (1 + $this->tributavel->percentualMva / 100);
     }
 
     private function calculaBaseComDescontoCondicional(float $baseCalculoInicial): float
     {
-
-        $baseCalculo = $baseCalculoInicial + $this->tributavel->desconto;
-        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducaoSt / 100);
-        return $baseCalculo;
+        return $baseCalculoInicial + $this->tributavel->desconto;
     }
 
     private function calculaBaseComDescontoIncondicional(float $baseCalculoInicial): float
     {
-        $baseCalculo = $baseCalculoInicial - $this->tributavel->desconto;
-        $baseCalculo = $baseCalculo - ($baseCalculo * $this->tributavel->percentualReducaoSt / 100);
-        return $baseCalculo;
+        return $baseCalculoInicial - $this->tributavel->desconto;
     }
 }

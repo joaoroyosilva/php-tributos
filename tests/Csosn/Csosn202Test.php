@@ -47,7 +47,7 @@ class Csosn202Test extends TestCase
 
         $this->assertEquals(18, $csosn->percentualIcmsSt);
         $this->assertEquals(0, $csosn->percentualReducaoSt);
-        $this->assertEquals(3339, $csosn->valorBcIcmsSt);
-        $this->assertEquals(241.02, round($csosn->valorIcmsSt, 2));
+        $this->assertEquals(3199, round($csosn->valorBcIcmsSt, 2));
+        $this->assertEquals(215.82, round($csosn->valorIcmsSt, 2));
     }
 }

@@ -76,7 +76,7 @@ class Cst10 extends Cst00
 
         $facade = new FacadeCalculadoraTributacao($tributavel, $this->tipoDesconto);
 
-        $tributavel->valorIpi = $facade->calculaIpi();
+        $tributavel->valorIpi = $facade->calculaIpi()->valor;
 
         $resultadoCalculoIcmsSt = $facade->calculaIcmsSt();
         $resultadoCalculoFcpSt = $facade->calculaFcpSt();
