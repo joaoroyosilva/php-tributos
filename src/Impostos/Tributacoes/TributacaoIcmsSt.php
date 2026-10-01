@@ -46,9 +46,10 @@ class TributacaoIcmsSt
 
         $baseCalculoIcmsSt = $this->calculaBaseCalculoIcmsSt->calculaBaseCalculoBase();
 
-        $valorIcmsSt = ($baseCalculoIcmsSt *
+        // ST abaixo do ICMS próprio não gera crédito: piso zero, base ST mantida
+        $valorIcmsSt = max(0, ($baseCalculoIcmsSt *
             ($this->tributavel->percentualIcmsSt / 100)) -
-            $valorIcmsProprio;
+            $valorIcmsProprio);
 
         if ($this->tributavel->percentualIcmsSt == 0) {
             return new ResultadoCalculoIcmsSt(
