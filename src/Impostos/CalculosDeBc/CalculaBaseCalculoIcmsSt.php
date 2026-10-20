@@ -30,8 +30,8 @@ class CalculaBaseCalculoIcmsSt extends CalculaBaseCalculoBase
     public function calculaBaseCalculoBase(): float
     {
         $baseCalculo = $this->tributavel->icmsSobreIpi ?
-            parent::calculaBaseDeCalculo() + $this->tributavel->valorIpi :
-            parent::calculaBaseDeCalculo();
+            $this->calculaBaseDeCalculoIcms() + $this->tributavel->valorIpi :
+            $this->calculaBaseDeCalculoIcms();
 
         $baseCalculo = $this->tipoDesconto == TipoDesconto::Condicional ?
         $this->calculaBaseComDescontoCondicional($baseCalculo) :

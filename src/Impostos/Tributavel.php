@@ -321,4 +321,28 @@ abstract class Tributavel
      * @var float
      */
     public $reducaoRegularCbs = 0;
+
+    /**
+     * IBS/CBS (efetivos) compõem o valor do produto (`vProd`/`vUnCom`) — NT 2026.008, a partir de
+     * 2027, exceto importação. Quem chama decide pelo ano de emissão; a lib não olha data.
+     *
+     * @var bool
+     */
+    public $rtcCompoeValorProduto = false;
+
+    /**
+     * IBS/CBS (efetivos) entram na base de todo o ICMS do item (próprio, FCP, ST, DIFAL, efetivo,
+     * crédito do Simples). Opção do lojista; só tem efeito com `rtcCompoeValorProduto`.
+     *
+     * @var bool
+     */
+    public $rtcNaBaseIcms = false;
+
+    /**
+     * IBS/CBS somados à base do ICMS. Preenchido pelo próprio `ResultadoTributacao::calcular()`
+     * a cada passada do laço; qualquer valor deixado por quem chama é zerado no início.
+     *
+     * @var float
+     */
+    public $valorRtcBaseIcms = 0;
 }

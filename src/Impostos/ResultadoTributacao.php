@@ -501,6 +501,38 @@ class ResultadoTributacao
      */
     public float $valorTribRegCbs = 0;
 
+    /**
+     * `vProd` do item: produto × quantidade, mais o IBS/CBS efetivo quando
+     * `rtcCompoeValorProduto` (NT 2026.008, a partir de 2027).
+     *
+     * @var float
+     */
+    public float $valorProdutoBruto = 0;
+    /**
+     * `vUnCom` = `valorProdutoBruto` ÷ quantidade, 10 casas.
+     *
+     * @var float
+     */
+    public float $valorUnitarioBruto = 0;
+    /**
+     * `vProdLiq` = produto × quantidade − ICMS (NT 2026.008, I11c).
+     *
+     * @var float
+     */
+    public float $valorProdutoLiquido = 0;
+    /**
+     * `vUnComLiq` = `valorProdutoLiquido` ÷ quantidade, 10 casas.
+     *
+     * @var float
+     */
+    public float $valorUnitarioLiquido = 0;
+
+    /**
+     * Teto de passadas do laço do IBS/CBS na base do ICMS. Converge em 2 a 4 (o erro cai por
+     * um fator a·t a cada passada); o teto só existe para o arredondamento que oscila.
+     */
+    public const MAX_ITERACOES_RTC_BASE_ICMS = 10;
+
     public function __construct(
         Tributavel $produto,
         int $crt,
@@ -517,6 +549,63 @@ class ResultadoTributacao
 
     public function calcular(): ResultadoTributacao
     {
+        $this->produto->valorRtcBaseIcms = 0;
+        $this->calcularTributos();
+
+        // IBS/CBS na base do ICMS: o ICMS sai da base do IBS/CBS e o IBS/CBS entra na base do
+        // ICMS. Ponto fixo — recalcula tudo com o RTC da passada anterior até ele repetir.
+        if ($this->rtcEntraNaBaseIcms()) {
+            for ($i = 0; $i < self::MAX_ITERACOES_RTC_BASE_ICMS; $i++) {
+                $rtc = $this->valorRtc();
+
+                if ($rtc == $this->produto->valorRtcBaseIcms) {
+                    break;
+                }
+
+                $this->produto->valorRtcBaseIcms = $rtc;
+                $this->calcularTributos();
+            }
+        }
+
+        $this->calcularValoresProduto();
+
+        return $this;
+    }
+
+    private function rtcEntraNaBaseIcms(): bool
+    {
+        return $this->produto->rtcCompoeValorProduto
+            && $this->produto->rtcNaBaseIcms
+            && ! $this->produto->isServico;
+    }
+
+    /**
+     * IBS/CBS que compõem o `vProd`: os valores EFETIVOS (com redução, sem o diferido), que são
+     * os que o XML destaca (`vCBS`, `vIBSUF`, `vIBSMun`).
+     */
+    private function valorRtc(): float
+    {
+        return round($this->valorEfetivoCbs + $this->valorEfetivoIbsUF + $this->valorEfetivoIbsMun, 2);
+    }
+
+    private function calcularValoresProduto(): void
+    {
+        $quantidade = (float) $this->produto->quantidadeProduto;
+        $subtotal   = round($this->produto->valorProduto * $quantidade, 2);
+
+        $this->valorProdutoBruto = $this->produto->rtcCompoeValorProduto
+            ? round($subtotal + $this->valorRtc(), 2)
+            : $subtotal;
+        $this->valorProdutoLiquido = round($subtotal - $this->valorIcms, 2);
+
+        $this->valorUnitarioBruto   = $quantidade > 0 ? round($this->valorProdutoBruto / $quantidade, 10) : 0;
+        $this->valorUnitarioLiquido = $quantidade > 0 ? round($this->valorProdutoLiquido / $quantidade, 10) : 0;
+    }
+
+    private function calcularTributos(): void
+    {
+        $this->valorCreditoPresumidoIbs = 0;
+
         if ($this->produto->isServico) {
             $calcularRetencao = ($this->crt == Crt::RegimeNormal || $this->crt == Crt::SimplesNacionalExcesso) &&
             $this->tipoPessoa != TipoPessoa::Fisica;
@@ -537,8 +626,6 @@ class ResultadoTributacao
         $this->calcularIbsUF();
         $this->calcularIbsMun();
         $this->calcularTribRegular();
-
-        return $this;
     }
 
     private function calcularICms()
@@ -620,6 +707,7 @@ class ResultadoTributacao
                     /** @var Cst51 */
                     $resultado =  $this->icms;
 
+                    $this->valorBcIcms = $resultado->valorBcIcms;
                     $this->percentualIcms = $resultado->percentualIcms;
                     $this->valorIcms = $resultado->valorIcms;
                     $this->percentualReducao = $resultado->percentualReducao;

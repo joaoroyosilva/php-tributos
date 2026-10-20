@@ -29,4 +29,13 @@ class CalculaBaseCalculoBase
 
         return $baseCalculo;
     }
+
+    /**
+     * Ponto de partida de toda base do ICMS: a base comum mais o IBS/CBS que a opção
+     * `rtcNaBaseIcms` põe dentro dela (zero quando desligada).
+     */
+    public function calculaBaseDeCalculoIcms(): float
+    {
+        return $this->calculaBaseDeCalculo() + $this->tributavel->valorRtcBaseIcms;
+    }
 }
